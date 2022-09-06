@@ -23,23 +23,8 @@ class Cliente {
     @Column(name = "cpf")
     val cpf: String? = null
 
-    @Column(name = "home_number")
-    val home_number : Date? = null
-
-    @Column(name = "purchase_date")
-    val purchase_date: Date? = null
-
-    @Column(name = "street")
-    val street: Date? = null
-
-    @Column(name = "arrival_date")
-    val arrival_date: Date? = null
-
-    @Column(name = "core")
-    val cores: Int? = null
-
-    @Column(name = "clock")
-    val clock: Double? = null
+    @Column(name = "contact_number")
+    val contactNumber : Date? = null
 
 
 }
