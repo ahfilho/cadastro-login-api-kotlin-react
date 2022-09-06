@@ -17,34 +17,30 @@ class Cpu {
     val brand: String? = null
 
     @Column(name = "serial_number", length = 15)
-    val serial_number: Int? = null
+    val serialNumber: Int? = null
 
     @Column(name = "model")
     val model: String? = null
 
     @Column(name = "purchase_price")
-    val purchase_price: Date? = null
+    val purchasePrice: Date? = null
 
     @Column(name = "purchase_date")
-    val purchase_date: Date? = null
+    val purchaseDate: Date? = null
 
     @Column(name = "sale_value")
-    val sale_value: Date? = null
+    val saleValue: Date? = null
 
     @Column(name = "arrival_date")
-    val arrival_date: Date? = null
+    val arrivalDate: Date? = null
 
-    @Column(name = "core")
+    @Column(name = "cores")
     val cores: Int? = null
 
-    @Column(name = "thread")
+    @Column(name = "threads")
     val threads: Int? = null
 
     @Column(name = "clock")
     val clock: Double? = null
-
-    val nome: String = "arlindo"
-
-    val teste: String? = null
 
 }
