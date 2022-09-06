@@ -20,13 +20,24 @@ class CpuService {
 
 
     }
-    fun deleteCpu(id: Long){
+
+    fun deleteCpu(id: Long) {
         return this.cpuRepository.delete(Cpu())
     }
 
 
-    fun List(): MutableList<Cpu>{
+    fun List(): MutableList<Cpu> {
         return this.cpuRepository.findAll()
     }
 
+    fun update(id: Long) {
+        val cpu = this.cpuRepository.findById(id)
+
+        val obj = Cpu()
+        if (cpu != null) {
+            cpu.get()
+            println("puxou algo")
+        }
+        return println("asdasdd teste update")
+    }
 }
