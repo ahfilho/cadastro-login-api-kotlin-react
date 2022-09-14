@@ -15,26 +15,25 @@ class CpuController {
     @Autowired
     lateinit var cpuService: CpuService
 
-    @GetMapping
-    fun list(): List<Cpu> {
-        return cpuService.List()
-    }
-
     @PostMapping
     fun save(@RequestBody cpu: Cpu): Cpu {
         return cpuService.saveCpu(cpu)
     }
 
+    @GetMapping
+    fun list(): List<Cpu> {
+        return cpuService.List()
+    }
+
     //TODO
     @PutMapping("/{id}")
     fun update(@PathVariable id: Long?, @RequestBody cpu: Cpu): ResponseEntity<Cpu?>? {
-        cpu.id
         return ResponseEntity.ok().body(cpuService.updateCpu(id!!, cpu))
     }
 
     @DeleteMapping("/{id}")
     fun delete(@PathVariable id: Long?): HttpStatus? {
-        this.cpuService.deleteCpu(id!!)
+        cpuService.deleteCpu(id!!)
         return HttpStatus.OK
     }
 
