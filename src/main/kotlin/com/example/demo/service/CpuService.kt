@@ -17,7 +17,6 @@ class CpuService {
     fun saveCpu(cpu: Cpu): Cpu {
         return this.cpuRepository.save(cpu)
 
-
     }
 
     fun deleteCpu(id: Long) {
@@ -26,21 +25,29 @@ class CpuService {
             cpuRepository.delete(teste.get())
     }
 
-
     fun List(): MutableList<Cpu> {
         return this.cpuRepository.findAll()
     }
 
     //TODO
     fun updateCpu(id: Long, cpu: Cpu): Cpu {
-        val a = cpuRepository.findById(id).map {
-            it.model
-            it.cores
-            it.brand
+        val a = cpuRepository.findById(id)
+        if (a.isPresent) {
+
+            val c: Cpu = a.get()
+            c.brand = cpu.brand
+            c.model = cpu.model
+            c.serialNumber = cpu.serialNumber
+            c.purchasePrice = cpu.purchasePrice
+            c.purchaseDate = cpu.purchaseDate
+            c.saleValue = cpu.saleValue
+            c.arrivalDate = cpu.arrivalDate
+            c.cores = cpu.cores
+            c.threads = cpu.threads
+            c.clock = cpu.clock
         }
-        cpuRepository.save(cpu)
         return cpu
+
     }
-
-
 }
+
