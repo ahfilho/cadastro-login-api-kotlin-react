@@ -27,13 +27,13 @@ class Ssd {
     val size: Int? = null
 
     @Column(name = "purchase_price")
-    val purchasPrice: Float? = null
+    val purchasePrice: Float? = null
 
     @Column(name = "purchase_date")
     val purchaseDate: Date? = null
 
     @Column(name = "sale_value")
-    val saleValue: Date? = null
+    val saleValue: Float? = null
 
     @Column(name = "arrival_date")
     val arrivalDate: Date? = null

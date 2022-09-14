@@ -6,7 +6,7 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "CPU")
-class Cpu {
+class Cpu() {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -14,33 +14,52 @@ class Cpu {
     val id: Long? = null
 
     @Column(name = "brand")
-    val brand: String? = null
+    var brand: String? = null
 
     @Column(name = "serial_number", length = 15)
-    val serialNumber: Int? = null
+    var serialNumber: String? = null
 
     @Column(name = "model")
-    val model: String? = null
+    var model: String? = null
 
     @Column(name = "purchase_price")
-    val purchasePrice: Date? = null
+    var purchasePrice: Date? = null
 
     @Column(name = "purchase_date")
-    val purchaseDate: Date? = null
+    var purchaseDate: Date? = null
 
     @Column(name = "sale_value")
-    val saleValue: Date? = null
+    var saleValue: Date? = null
 
     @Column(name = "arrival_date")
-    val arrivalDate: Date? = null
+    var arrivalDate: Date? = null
 
     @Column(name = "cores")
-    val cores: Int? = null
+    var cores: Int? = null
 
     @Column(name = "threads")
-    val threads: Int? = null
+    var threads: Int? = null
 
     @Column(name = "clock")
-    val clock: Double? = null
+    var clock: Double? = null
+
+
+    constructor(
+        brand: String?,
+        model: String?,
+        serialNumber: String,
+        purchasePrice: Date,
+        purchaseDate: Date,
+        saleValue: Float?,
+        arrivalDate: Date?,
+        core: Int?,
+        threads: Int?,
+        clock: Float?
+    ) : this() {
+        this.brand = brand
+        this.model = model
+        this.serialNumber = serialNumber
+    }
+
 
 }

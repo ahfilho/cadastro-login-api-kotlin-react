@@ -3,9 +3,8 @@ package com.example.demo.service
 import com.example.demo.entity.Cpu
 import com.example.demo.repository.CpuRepository
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.http.HttpStatus
-import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
+import java.util.*
 import javax.transaction.Transactional
 
 @Service
@@ -22,7 +21,9 @@ class CpuService {
     }
 
     fun deleteCpu(id: Long) {
-        return this.cpuRepository.delete(Cpu())
+        val teste: Optional<Cpu> = cpuRepository.findById(id)
+        if (cpuRepository.existsById(id))
+            cpuRepository.delete(teste.get())
     }
 
 
@@ -30,14 +31,16 @@ class CpuService {
         return this.cpuRepository.findAll()
     }
 
-    fun update(id: Long) {
-        val cpu = this.cpuRepository.findById(id)
-
-        val obj = Cpu()
-        if (cpu != null) {
-            cpu.get()
-            println("puxou algo")
+    //TODO
+    fun updateCpu(id: Long, cpu: Cpu): Cpu {
+        val a = cpuRepository.findById(id).map {
+            it.model
+            it.cores
+            it.brand
         }
-        return println("asdasdd teste update")
+        cpuRepository.save(cpu)
+        return cpu
     }
+
+
 }
