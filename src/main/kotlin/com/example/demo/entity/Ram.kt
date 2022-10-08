@@ -18,22 +18,22 @@ class Ram {
     val brand: String? = null
 
     @Column(name = "serial_number")
-    val serial_number: Int? = null
+    val serialNumber: String? = null
 
     @Column(name = "size")
     val size: Int? = null
 
     @Column(name = "purchase_price")
-    val purchase_price: Date? = null
+    val purchasePrice: Date? = null
 
     @Column(name = "purchase_date")
-    val purchase_date: Date? = null
+    val purchaseDate: Date? = null
 
     @Column(name = "sale_value")
-    val sale_value: Date? = null
+    val saleValue: Date? = null
 
     @Column(name = "arrival_date")
-    val arrival_date: Date? = null
+    val arrivalDate: Date? = null
 
     @Column(name = "frequency")
     val frequency: Double? = null
