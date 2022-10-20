@@ -32,5 +32,4 @@ class RamService {
         if(d.isPresent){
             ramRepository.delete(d.get())
         }
-    }
 }

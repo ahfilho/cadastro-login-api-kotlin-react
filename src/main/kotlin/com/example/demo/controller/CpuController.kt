@@ -15,26 +15,30 @@ class CpuController {
     @Autowired
     lateinit var cpuService: CpuService
 
+    @PostMapping
+    fun save(@RequestBody cpu: Cpu): ResponseEntity<Any> { //response.. ANY - retorna alguma coisa, seja qual for
+        try {
+            cpuService.saveCpu(cpu)
+            return ResponseEntity.status(HttpStatus.OK).body("SALVO COM SUCESSO!")
+        } catch (e: Exception) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("ERRO AO SALVAR")
+        }
+    }
+
     @GetMapping
     fun list(): List<Cpu> {
         return cpuService.List()
     }
 
-    @PostMapping
-    fun save(@RequestBody cpu: Cpu): Cpu {
-        return cpuService.saveCpu(cpu)
-    }
-
     //TODO
     @PutMapping("/{id}")
     fun update(@PathVariable id: Long?, @RequestBody cpu: Cpu): ResponseEntity<Cpu?>? {
-        cpu.id
         return ResponseEntity.ok().body(cpuService.updateCpu(id!!, cpu))
     }
 
     @DeleteMapping("/{id}")
     fun delete(@PathVariable id: Long?): HttpStatus? {
-        this.cpuService.deleteCpu(id!!)
+        cpuService.deleteCpu(id!!)
         return HttpStatus.OK
     }
 
