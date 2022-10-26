@@ -5,3 +5,4 @@ Spring
 Jpa
 Postgres
 Docker
+Intellij
