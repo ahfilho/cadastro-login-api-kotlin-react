@@ -19,21 +19,24 @@ class SsdController {
     @Autowired
     lateinit var ssdService: HdSsdService
 
-   @GetMapping
-   fun list(): List<Ssd> {
-       return ssdService.List()
-   }
+    @GetMapping
+    fun list(): List<Ssd> {
+        return ssdService.List()
+    }
+
     @PostMapping
-    fun save(@RequestBody ssd: Ssd): Ssd{
+    fun save(@RequestBody ssd: Ssd): Ssd {
         return this.ssdService.save(ssd)
     }
+
     @DeleteMapping("/{id}")
     fun delete(@PathVariable("id") id: Long) {
         return ssdService.delete(id)
     }
+
     @PutMapping("/{id}")
-    fun update(@PathVariable("id")id: Long){
-       // return ssdService.update(id)
+    fun update(@PathVariable("id") id: Long) {
+        // return ssdService.update(id)
     }
 
     @GetMapping("/teste")
