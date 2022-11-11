@@ -37,7 +37,7 @@ class ClientController {
     @PutMapping("/{id}")
     fun updateClient(@PathVariable id: Long?, @RequestBody client: Client): ResponseEntity<Client?>? {
         client.id
-        return ResponseEntity.ok().body(clientService.updateClientService(id!!, client))
+        return ResponseEntity.ok().body(clientService.updateClient(id!!, client))
     }
 
     @DeleteMapping("/{id}")
