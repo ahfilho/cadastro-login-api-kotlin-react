@@ -12,19 +12,19 @@ class Client {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
-    val id: Long? = null
+    var id: Long? = null
 
     @Column(name = "name")
-    val name: String? = null
+    var name: String? = null
 
     @Column(name = "telephone")
-    val telephone: Int? = null
+    var telephone: Int? = null
 
     @Column(name = "cpf")
-    val cpf: String? = null
+    var cpf: String? = null
 
     @Column(name = "contact_number")
-    val contactNumber : Date? = null
+    var contactNumber : Date? = null
 
 
 }

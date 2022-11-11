@@ -33,7 +33,6 @@ class CpuService {
     fun updateCpu(id: Long, cpu: Cpu): Cpu {
         val a = cpuRepository.findById(id)
         if (a.isPresent) {
-
             val c: Cpu = a.get()
             c.brand = cpu.brand
             c.model = cpu.model
