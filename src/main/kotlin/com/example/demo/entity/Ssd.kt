@@ -18,7 +18,7 @@ class Ssd {
     val id: Long? = null
 
     @Column(name = "brand")
-    val brand: String? = null
+    var brand: String? = null
 
     @Column(name = "serial_number", length = 17)
     val serialNumber: String? = null
@@ -36,7 +36,7 @@ class Ssd {
     val saleValue: Float? = null
 
     @Column(name = "arrival_date")
-    val arrivalDate: Date? = null
+    var arrivalDate: Date? = null
 
 
 }
