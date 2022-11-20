@@ -12,7 +12,7 @@ import javax.transaction.Transactional
 class HdSsdService {
 
     @Autowired
-    lateinit var repositorySsd: SsdRepository
+    lateinit var ssdRepository: SsdRepository
 
     fun save(hdssd: Ssd): Ssd {
         val tempo = Calendar.getInstance()
@@ -26,29 +26,39 @@ class HdSsdService {
 //            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Status(1,"ERRO"))
 //        }
 
-        return this.repositorySsd.save(hdssd)
+        return this.ssdRepository.save(hdssd)
     }
 
     fun List(): MutableList<Ssd> {
 
-        return this.repositorySsd.findAll()
+        return this.ssdRepository.findAll()
     }
 
     fun delete(id: Long) {
-        return this.repositorySsd.delete(Ssd())
+        return this.ssdRepository.delete(Ssd())
     }
+
     fun teste(): List<Ssd> {
-        return this.repositorySsd.checaTeste()
+        return this.ssdRepository.checaTeste()
     }
 
-}
 
-fun update(id: Long) {
-    //Optional<Long >() teste = (Optional<HdSsd>) EMPTY;
+    //TODO TERMINAR
+    fun updateSsd(id: Long, ssd: Ssd): Ssd {
+        val buscaSsd = ssdRepository.findById(id)
+        if (buscaSsd.isPresent) {
+            val objetoNovo: Ssd = buscaSsd.get()
+            objetoNovo.brand = ssd.brand
+            objetoNovo.arrivalDate = ssd.arrivalDate
+            objetoNovo.purchaseDate
+            objetoNovo.size
+            objetoNovo.saleValue
+            objetoNovo.purchasePrice
+            objetoNovo.serialNumber
+        }
 
-    // if(id!= null){
-    //  val a = object : HdSsd() {
-
+        return ssd
+    }
 }
 
 
