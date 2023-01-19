@@ -42,7 +42,6 @@ class HdSsdService {
         return this.ssdRepository.checaTeste()
     }
 
-
     //TODO TERMINAR
     fun updateSsd(id: Long, ssd: Ssd): Ssd {
         val buscaSsd = ssdRepository.findById(id)
@@ -56,7 +55,6 @@ class HdSsdService {
             objetoNovo.purchasePrice
             objetoNovo.serialNumber
         }
-
         return ssd
     }
 }
