@@ -24,24 +24,19 @@ class SsdController {
     fun list(): List<Ssd> {
         return ssdService.List()
     }
-
     @PostMapping
     fun save(@RequestBody ssd: Ssd): Ssd {
         return this.ssdService.save(ssd)
     }
-
     @DeleteMapping("/{id}")
     fun delete(@PathVariable("id") id: Long) {
         return ssdService.delete(id)
     }
-
     @PutMapping("/{id}")
     fun update(@PathVariable id: Long?,@RequestBody ssd:Ssd): ResponseEntity<Ssd?>?{
         ssd.id
         return ResponseEntity.ok().body(ssdService.updateSsd(id!!, ssd))
-
     }
-
     @GetMapping("/teste")
     fun teste(): List<Ssd> {
         return ssdService.teste()

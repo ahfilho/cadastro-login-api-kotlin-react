@@ -16,7 +16,6 @@ class CpuService {
 
     fun saveCpu(cpu: Cpu): Cpu {
         return this.cpuRepository.save(cpu)
-
     }
 
     fun deleteCpu(id: Long) {
@@ -46,7 +45,6 @@ class CpuService {
             c.clock = cpu.clock
         }
         return cpu
-
     }
 }
 
