@@ -22,19 +22,19 @@ class Ssd {
     var brand: String? = null
 
     @Column(name = "serial_number", length = 17)
-    val serialNumber: String? = null
+    var serialNumber: String? = null
 
     @Column(name = "size_storage", length = 3)
-    val size: Int? = null
+    var size: Int? = null
 
     @Column(name = "purchase_price")
-    val purchasePrice: Float? = null
+    var purchasePrice: Float? = null
 
     @Column(name = "purchase_date")
     var purchaseDate: LocalDate? = null
 
     @Column(name = "sale_value")
-    val saleValue: Float? = null
+    var saleValue: Float? = null
 
     @Column(name = "arrival_date")
     var arrivalDate: LocalDate? = null

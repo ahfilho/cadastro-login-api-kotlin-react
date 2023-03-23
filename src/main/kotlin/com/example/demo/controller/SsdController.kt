@@ -3,6 +3,7 @@ package com.example.demo.controller
 import com.example.demo.service.HdSsdService
 import com.example.demo.entity.Ssd
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
@@ -24,19 +25,24 @@ class SsdController {
     fun list(): List<Ssd> {
         return ssdService.List()
     }
+
     @PostMapping
     fun save(@RequestBody ssd: Ssd): Ssd {
         return this.ssdService.save(ssd)
     }
+
     @DeleteMapping("/{id}")
-    fun delete(@PathVariable("id") id: Long) {
-        return ssdService.delete(id)
+    fun deleteSsd(@PathVariable("id") id: Long): HttpStatus? {
+        ssdService.delete(id!!)
+        return HttpStatus.OK
     }
+
     @PutMapping("/{id}")
-    fun update(@PathVariable id: Long?,@RequestBody ssd:Ssd): ResponseEntity<Ssd?>?{
+    fun update(@PathVariable id: Long?, @RequestBody ssd: Ssd): ResponseEntity<Ssd?>? {
         ssd.id
         return ResponseEntity.ok().body(ssdService.updateSsd(id!!, ssd))
     }
+
     @GetMapping("/teste")
     fun teste(): List<Ssd> {
         return ssdService.teste()

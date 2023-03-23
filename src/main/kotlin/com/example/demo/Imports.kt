@@ -7,6 +7,4 @@ class EstudarApp
 
 fun main(args: Array<String>) {
     runApplication<EstudarApp>(*args)
-
-    println("olá,mundo")
 }
