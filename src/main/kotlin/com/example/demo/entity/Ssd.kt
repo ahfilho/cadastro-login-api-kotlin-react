@@ -1,5 +1,6 @@
 package com.example.demo.entity
 
+import java.time.LocalDate
 import java.util.Date
 import javax.persistence.Column
 import javax.persistence.Entity
@@ -30,13 +31,13 @@ class Ssd {
     val purchasePrice: Float? = null
 
     @Column(name = "purchase_date")
-    val purchaseDate: Date? = null
+    var purchaseDate: LocalDate? = null
 
     @Column(name = "sale_value")
     val saleValue: Float? = null
 
     @Column(name = "arrival_date")
-    var arrivalDate: Date? = null
+    var arrivalDate: LocalDate? = null
 
 
 }
