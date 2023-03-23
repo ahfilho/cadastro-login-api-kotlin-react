@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.util.Calendar
+import java.util.Optional
 import javax.transaction.Transactional
 
 @Service
@@ -29,9 +30,10 @@ class HdSsdService {
     }
 
     fun delete(id: Long) {
-        val findId = ssdRepository.findById(id)
-        if (findId.isPresent)
-        ssdRepository.delete(Ssd())
+        val del: Optional<Ssd> = ssdRepository.findById(id)
+        if (ssdRepository.existsById(id))
+            ssdRepository.delete(del.get())
+
     }
 
     fun teste(): List<Ssd> {
@@ -40,18 +42,19 @@ class HdSsdService {
 
     //TODO TERMINAR
     fun updateSsd(id: Long, ssd: Ssd): Ssd {
-        val buscaSsd = ssdRepository.findById(id)
-        if (buscaSsd.isPresent) {
-            val objetoNovo: Ssd = buscaSsd.get()
-            objetoNovo.brand = ssd.brand
-            objetoNovo.arrivalDate = ssd.arrivalDate
-            objetoNovo.purchaseDate
-            objetoNovo.size
-            objetoNovo.saleValue
-            objetoNovo.purchasePrice
-            objetoNovo.serialNumber
+        val oldObject: Ssd = ssdRepository.getById(id)
+
+        if (ssdRepository.existsById(id)) {
+            oldObject.brand = ssd.brand
+            oldObject.arrivalDate = ssd.arrivalDate
+            oldObject.purchaseDate = ssd.purchaseDate
+            oldObject.size = ssd.size
+            oldObject.saleValue = ssd.saleValue
+            oldObject.purchasePrice = ssd.purchasePrice
+            oldObject.serialNumber = ssd.serialNumber
+            ssdRepository.save(oldObject)
         }
-        return ssd
+        return oldObject
     }
 }
 
