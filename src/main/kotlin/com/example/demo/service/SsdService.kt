@@ -4,6 +4,8 @@ import com.example.demo.entity.Ssd
 import com.example.demo.repository.SsdRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import java.time.LocalDate
+import java.time.LocalDateTime
 import java.util.Calendar
 import javax.transaction.Transactional
 
@@ -15,18 +17,10 @@ class HdSsdService {
     lateinit var ssdRepository: SsdRepository
 
     fun save(hdssd: Ssd): Ssd {
-        val tempo = Calendar.getInstance()
-        println(tempo.time)
-//
-//        try {
-//            if(hdssd.serialNumber == "" || hdssd.serialNumber == null){
-//                ResponseEntity.badRequest()
-//            }
-//        } catch (e: Exception) {
-//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Status(1,"ERRO"))
-//        }
 
-        return this.ssdRepository.save(hdssd)
+        hdssd.arrivalDate = LocalDate.now()
+        ssdRepository.save(hdssd)
+        return hdssd
     }
 
     fun List(): MutableList<Ssd> {
@@ -35,7 +29,9 @@ class HdSsdService {
     }
 
     fun delete(id: Long) {
-        return this.ssdRepository.delete(Ssd())
+        val findId = ssdRepository.findById(id)
+        if (findId.isPresent)
+        ssdRepository.delete(Ssd())
     }
 
     fun teste(): List<Ssd> {
