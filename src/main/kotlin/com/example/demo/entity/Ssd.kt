@@ -1,5 +1,6 @@
 package com.example.demo.entity
 
+import java.math.BigDecimal
 import java.time.LocalDate
 import java.util.Date
 import javax.persistence.Column
@@ -28,7 +29,7 @@ class Ssd {
     var size: Int? = null
 
     @Column(name = "purchase_price")
-    var purchasePrice: Float? = null
+    var purchasePrice: BigDecimal? = null
 
     @Column(name = "purchase_date")
     var purchaseDate: LocalDate? = null
