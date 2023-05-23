@@ -29,7 +29,7 @@ class Ssd {
     var size: Int? = null
 
     @Column(name = "purchase_price")
-    var purchasePrice: BigDecimal? = null
+    var purchasePrice: Double? = null
 
     @Column(name = "purchase_date")
     var purchaseDate: LocalDate? = null

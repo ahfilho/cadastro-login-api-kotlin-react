@@ -9,10 +9,10 @@ import javax.transaction.Transactional
 
 @Service
 @Transactional
-class ClientService {
+class ClientService(private val clientRepository: ClientRepository) {
 
-    @Autowired
-    lateinit var clientRepository: ClientRepository
+//    @Autowired
+//    lateinit var clientRepository: ClientRepository
 
     fun List(): MutableList<Client> {
         return clientRepository.findAll()

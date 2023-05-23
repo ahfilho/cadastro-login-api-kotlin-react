@@ -10,10 +10,10 @@ import java.util.*
 
 @RestController
 @RequestMapping("/cpu")
-class CpuController {
+class CpuController(private val cpuService: CpuService) {
 
-    @Autowired
-    lateinit var cpuService: CpuService
+//    @Autowired
+//    lateinit var cpuService: CpuService
 
     @PostMapping
     fun save(@RequestBody cpu: Cpu): ResponseEntity<Any> { //response.. ANY - retorna alguma coisa, seja qual for
