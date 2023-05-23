@@ -9,10 +9,10 @@ import javax.transaction.Transactional
 
 @Service
 @Transactional
-class CpuService {
+class CpuService(private val cpuRepository: CpuRepository) {
 
-    @Autowired
-    lateinit var cpuRepository: CpuRepository
+//    @Autowired
+//    lateinit var cpuRepository: CpuRepository
 
     fun saveCpu(cpu: Cpu): Cpu {
         return this.cpuRepository.save(cpu)

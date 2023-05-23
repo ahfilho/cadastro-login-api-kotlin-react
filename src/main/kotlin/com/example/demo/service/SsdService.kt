@@ -12,10 +12,10 @@ import javax.transaction.Transactional
 
 @Service
 @Transactional
-class HdSsdService {
+class HdSsdService(private val ssdRepository: SsdRepository) {
 
-    @Autowired
-    lateinit var ssdRepository: SsdRepository
+//    @Autowired
+//    lateinit var ssdRepository: SsdRepository
 
     fun save(hdssd: Ssd): Ssd {
 

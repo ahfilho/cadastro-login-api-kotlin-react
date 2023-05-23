@@ -17,26 +17,29 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/ram")
-class RamController {
+class RamController(private val ramService: RamService) {
 
-@Autowired
-lateinit var ramService: RamService;
+//@Autowired
+//lateinit var ramService: RamService;
 
     @PostMapping
     fun save(@RequestBody ram: Ram): Ram? {
         return ramService.saveRam(ram);
     }
+
     @GetMapping
-    fun list(): List<Ram>{
+    fun list(): List<Ram> {
         return ramService.listALl();
     }
+
     @PutMapping("/{id}")
-    fun update(@PathVariable id: Long?,@RequestBody ram: Ram): ResponseEntity<Ram?>?{
+    fun update(@PathVariable id: Long?, @RequestBody ram: Ram): ResponseEntity<Ram?>? {
         ram.id
-        return ResponseEntity.ok().body(ramService.update(id!!,ram))
+        return ResponseEntity.ok().body(ramService.update(id!!, ram))
     }
+
     @DeleteMapping("/{id}")
-    fun delete(@PathVariable id: Long?): HttpStatus?{
+    fun delete(@PathVariable id: Long?): HttpStatus? {
         ramService.delete(id!!)
         return HttpStatus.OK
     }

@@ -8,9 +8,10 @@ import javax.transaction.Transactional
 
 @Service
 @Transactional
-class RamService {
-    @Autowired
-    lateinit var ramRepository: RamRepository;
+class RamService(private val ramRepository: RamRepository) {
+
+//    @Autowired
+//    lateinit var ramRepository: RamRepository
 
     fun saveRam(ram: Ram): Ram? {
         return ramRepository.save(ram)

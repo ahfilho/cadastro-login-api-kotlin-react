@@ -17,11 +17,11 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/client")
-class ClientController {
+class ClientController(private val clientService: ClientService) {
 
-
-    @Autowired
-    lateinit var clientService: ClientService
+//
+//    @Autowired
+//    lateinit var clientService: ClientService
 
 
     @GetMapping
