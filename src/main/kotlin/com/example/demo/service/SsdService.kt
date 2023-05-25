@@ -20,6 +20,7 @@ class HdSsdService(private val ssdRepository: SsdRepository) {
     fun save(hdssd: Ssd): Ssd {
 
         hdssd.arrivalDate = LocalDate.now()
+        hdssd.actualDate = LocalDate.now()
         ssdRepository.save(hdssd)
         return hdssd
     }

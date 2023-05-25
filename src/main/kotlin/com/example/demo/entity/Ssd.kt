@@ -16,7 +16,7 @@ class Ssd {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "encryptId")
+    @Column(name = "id")
     val id: Long? = null
 
     @Column(name = "brand")
@@ -40,5 +40,9 @@ class Ssd {
     @Column(name = "arrival_date")
     var arrivalDate: LocalDate? = null
 
+    @Column(name = "actual_date")
+    var actualDate: LocalDate? = null
 
+    @Column(name = "sale_date")
+    var saleDate: LocalDate? = null
 }
