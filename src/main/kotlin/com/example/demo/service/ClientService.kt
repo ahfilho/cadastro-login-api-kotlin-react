@@ -4,21 +4,19 @@ import com.example.demo.entity.Client
 import com.example.demo.repository.ClientRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-import java.util.Optional
+import java.util.*
 import javax.transaction.Transactional
 
 @Service
 @Transactional
 class ClientService(private val clientRepository: ClientRepository) {
 
-//    @Autowired
-//    lateinit var clientRepository: ClientRepository
-
     fun List(): MutableList<Client> {
         return clientRepository.findAll()
     }
 
     fun saveClient(client: Client): Client {
+        client.dateRegister = Date();
         return clientRepository.save(client)
     }
 
@@ -28,8 +26,10 @@ class ClientService(private val clientRepository: ClientRepository) {
             val objClient: Client = busca.get()
             objClient.name = client.name
             objClient.cpf = client.cpf
-            objClient.telephone = client.telephone
-            objClient.contactNumber = client.contactNumber
+            objClient.phone = client.phone
+            objClient.dateRegister = Date();
+            println(objClient.dateRegister)
+
         }
         return client
     }

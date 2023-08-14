@@ -19,11 +19,6 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/client")
 class ClientController(private val clientService: ClientService) {
 
-//
-//    @Autowired
-//    lateinit var clientService: ClientService
-
-
     @GetMapping
     fun list(): List<Client> {
         return clientService.List()

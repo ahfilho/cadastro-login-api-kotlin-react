@@ -11,20 +11,20 @@ class Client {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "id")
+    @Column(name = "ID")
     var id: Long? = null
 
-    @Column(name = "name")
+    @Column(name = "NAME")
     var name: String? = null
 
-    @Column(name = "telephone")
-    var telephone: Int? = null
+    @Column(name = "PHONE")
+    var phone: Int? = null
 
-    @Column(name = "cpf")
+    @Column(name = "CPF")
     var cpf: String? = null
 
-    @Column(name = "contact_number")
-    var contactNumber : Date? = null
+    @Column(name = "DATE_REGISTER")
+    var dateRegister : Date? = null
 
 
 }
