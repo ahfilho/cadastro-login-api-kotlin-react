@@ -1,8 +1,8 @@
-# backend_api_kt
+# backend_api_kotlin
 
-Kotlin
-Spring
-Jpa
-Postgres
-Docker
-Intellij
+Kotlin<br>
+Spring boot<br>
+Spring data Jpa<br>
+Postgres <br>
+Docker <br>
+Intellij<br>
