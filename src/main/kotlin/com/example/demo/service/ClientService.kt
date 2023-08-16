@@ -1,23 +1,23 @@
 package com.example.demo.service
 
+import com.example.demo.dto.ClientDto
 import com.example.demo.entity.Client
 import com.example.demo.repository.ClientRepository
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.util.*
 import javax.transaction.Transactional
 
 @Service
 @Transactional
-class ClientService(private val clientRepository: ClientRepository) {
+class ClientService(private val clientRepository: ClientRepository ) {
 
     fun List(): MutableList<Client> {
         return clientRepository.findAll()
     }
+    fun saveClient(client: Client) {
 
-    fun saveClient(client: Client): Client {
-        client.dateRegister = Date();
-        return clientRepository.save(client)
+        client.dateRegister= Date();
+             clientRepository.save(client)
     }
 
     fun updateClient(id: Long, client: Client): Client {

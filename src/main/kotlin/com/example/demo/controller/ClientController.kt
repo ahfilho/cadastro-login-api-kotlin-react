@@ -1,9 +1,8 @@
 package com.example.demo.controller
 
+import com.example.demo.dto.ClientDto
 import com.example.demo.entity.Client
 import com.example.demo.service.ClientService
-import org.apache.coyote.Response
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
@@ -25,8 +24,9 @@ class ClientController(private val clientService: ClientService) {
     }
 
     @PostMapping
-    fun save(@RequestBody client: Client): Client {
-        return clientService.saveClient(client)
+    fun save(@RequestBody client: Client): ResponseEntity<Any> {
+       clientService.saveClient(client)
+        return ResponseEntity.status(HttpStatus.OK).body(/* body = */ "Cliente " + client.name + " salvo com sucesso!")
     }
 
     @PutMapping("/{id}")
