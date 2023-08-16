@@ -1,12 +1,12 @@
 package com.example.demo.entity
 
 
-import java.util.Date
+import java.util.*
 import javax.persistence.*
 
 
 @Entity
-@Table(name = "client")
+@Table(name = "CLIENT")
 class Client {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +24,10 @@ class Client {
     var cpf: String? = null
 
     @Column(name = "DATE_REGISTER")
-    var dateRegister : Date? = null
+    var dateRegister: Date? = null
 
+    @OneToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+    @JoinColumn(name = "CLIENT_ID")
+    val address: Address? = null
 
 }
