@@ -25,7 +25,13 @@ class ClientController(private val clientService: ClientService) {
 
     @PostMapping
     fun save(@RequestBody client: Client): ResponseEntity<Any> {
-       clientService.saveClient(client)
+        val existingClient = clientService.findByCpf(client.cpf)
+        if (existingClient.isPresent) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body("Não foi possível salvar o cliente. O Cpf informado: " + client.cpf + " já existe.")
+
+        }
+        clientService.saveClient(client)
         return ResponseEntity.status(HttpStatus.OK).body(/* body = */ "Cliente " + client.name + " salvo com sucesso!")
     }
 

@@ -1,6 +1,5 @@
 package com.example.demo.service
 
-import com.example.demo.dto.ClientDto
 import com.example.demo.entity.Client
 import com.example.demo.repository.ClientRepository
 import org.springframework.stereotype.Service
@@ -9,15 +8,18 @@ import javax.transaction.Transactional
 
 @Service
 @Transactional
-class ClientService(private val clientRepository: ClientRepository ) {
+class ClientService(private val clientRepository: ClientRepository) {
 
     fun List(): MutableList<Client> {
         return clientRepository.findAll()
     }
+
     fun saveClient(client: Client) {
 
-        client.dateRegister= Date();
-             clientRepository.save(client)
+        findByCpf(client.cpf)
+
+        client.dateRegister = Date();
+        clientRepository.save(client)
     }
 
     fun updateClient(id: Long, client: Client): Client {
@@ -38,6 +40,11 @@ class ClientService(private val clientRepository: ClientRepository ) {
         val del: Optional<Client> = clientRepository.findById(id)
         if (clientRepository.existsById(id))
             clientRepository.delete(del.get())
+
+    }
+
+    fun findByCpf(cpf: String?): Optional<Client> {
+        return clientRepository.findByCpf(cpf)
 
     }
 
