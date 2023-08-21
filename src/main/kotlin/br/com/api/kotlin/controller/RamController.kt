@@ -1,0 +1,46 @@
+package br.com.api.kotlin.controller
+
+import br.com.api.kotlin.entity.Ram
+import br.com.api.kotlin.service.RamService
+import org.springframework.beans.factory.annotation.Autowired
+
+import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.DeleteMapping
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
+import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RestController
+
+@RestController
+@RequestMapping("/ram")
+class RamController(private val ramService: br.com.api.kotlin.service.RamService) {
+
+//@Autowired
+//lateinit var ramService: RamService;
+
+    @PostMapping
+    fun save(@RequestBody ram: br.com.api.kotlin.entity.Ram): br.com.api.kotlin.entity.Ram? {
+        return ramService.saveRam(ram);
+    }
+
+    @GetMapping
+    fun list(): List<br.com.api.kotlin.entity.Ram> {
+        return ramService.listALl();
+    }
+
+    @PutMapping("/{id}")
+    fun update(@PathVariable id: Long?, @RequestBody ram: br.com.api.kotlin.entity.Ram): ResponseEntity<br.com.api.kotlin.entity.Ram?>? {
+        ram.id
+        return ResponseEntity.ok().body(ramService.update(id!!, ram))
+    }
+
+    @DeleteMapping("/{id}")
+    fun delete(@PathVariable id: Long?): HttpStatus? {
+        ramService.delete(id!!)
+        return HttpStatus.OK
+    }
+}

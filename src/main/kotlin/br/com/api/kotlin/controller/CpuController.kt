@@ -1,0 +1,48 @@
+package br.com.api.kotlin.controller
+
+import br.com.api.kotlin.entity.Cpu
+import br.com.api.kotlin.service.CpuService
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.*
+import java.util.*
+
+@RestController
+@RequestMapping("/cpu")
+class CpuController(private val cpuService: br.com.api.kotlin.service.CpuService) {
+
+//    @Autowired
+//    lateinit var cpuService: CpuService
+
+    @PostMapping
+    fun save(@RequestBody cpu: br.com.api.kotlin.entity.Cpu): ResponseEntity<Any> { //response.. ANY - retorna alguma coisa, seja qual for
+        try {
+            cpuService.saveCpu(cpu)
+            return ResponseEntity.status(HttpStatus.OK).body("SALVO COM SUCESSO!")
+        } catch (e: Exception) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("ERRO AO SALVAR")
+        }
+    }
+
+    @GetMapping
+    fun list(): List<br.com.api.kotlin.entity.Cpu> {
+        return cpuService.List()
+    }
+
+    //TODO
+    @PutMapping("/{id}")
+    fun update(@PathVariable id: Long?, @RequestBody cpu: br.com.api.kotlin.entity.Cpu): ResponseEntity<br.com.api.kotlin.entity.Cpu?>? {
+        return ResponseEntity.ok().body(cpuService.updateCpu(id!!, cpu))
+    }
+
+    @DeleteMapping("/{id}")
+    fun delete(@PathVariable id: Long?): HttpStatus? {
+        cpuService.deleteCpu(id!!)
+        return HttpStatus.OK
+    }
+
+}
+
+
+
