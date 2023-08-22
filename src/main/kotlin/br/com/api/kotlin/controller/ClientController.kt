@@ -16,15 +16,15 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/client")
-class ClientController(private val clientService: br.com.api.kotlin.service.ClientService) {
+class ClientController(private val clientService: ClientService) {
 
     @GetMapping
-    fun list(): List<br.com.api.kotlin.entity.Client> {
+    fun list(): List<Client> {
         return clientService.List()
     }
 
     @PostMapping
-    fun save(@RequestBody client: br.com.api.kotlin.entity.Client): ResponseEntity<Any> {
+    fun save(@RequestBody client: Client): ResponseEntity<Any> {
         val existingClient = clientService.findByCpf(client.cpf)
         if (existingClient.isPresent) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
@@ -36,7 +36,10 @@ class ClientController(private val clientService: br.com.api.kotlin.service.Clie
     }
 
     @PutMapping("/{id}")
-    fun updateClient(@PathVariable id: Long?, @RequestBody client: br.com.api.kotlin.entity.Client): ResponseEntity<br.com.api.kotlin.entity.Client?>? {
+    fun updateClient(
+        @PathVariable id: Long?,
+        @RequestBody client: Client,
+    ): ResponseEntity<Client?>{
         client.id
         return ResponseEntity.ok().body(clientService.updateClient(id!!, client))
     }

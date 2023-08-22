@@ -1,9 +1,13 @@
 package br.com.api.kotlin.controller
 
 import br.com.api.kotlin.code.GeneratorCode
+import br.com.api.kotlin.entity.Sale
+import br.com.api.kotlin.service.SaleService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -12,17 +16,17 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/sale")
 @RestController
 class SaleController(
-    private val saleService: br.com.api.kotlin.service.SaleService,
+    private val saleService: SaleService,
     private val generatorCode: GeneratorCode,
 ) {
 
     @GetMapping
-    fun list(): List<br.com.api.kotlin.entity.Sale> {
+    fun list(): List<Sale> {
         return saleService.List()
     }
 
     @PostMapping
-    fun save(@RequestBody sale: br.com.api.kotlin.entity.Sale): ResponseEntity<Any> {
+    fun save(@RequestBody sale: Sale): ResponseEntity<Any> {
 
         val codeSize = 10
         val codeFinal = generatorCode.generateCode(codeSize)
@@ -49,11 +53,21 @@ class SaleController(
             println("Código da Venda:$codeFinal")
             println("==========================")
             saleService.save(sale)
+
             return ResponseEntity.status(HttpStatus.OK).body("Venda realizada com sucesso.")
         } catch (e: Exception) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Venda não realizada.")
         }
     }
 
+    @DeleteMapping("/{id}")
+    fun delete(@PathVariable id: Long?): HttpStatus? {
+        val del = saleService.deleteSale(id!!)
+        if (del != 0) {
+            saleService.deleteSale(id)
+            return HttpStatus.OK
+        }
+        return HttpStatus.BAD_REQUEST
 
+    }
 }

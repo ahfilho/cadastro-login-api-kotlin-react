@@ -10,30 +10,37 @@ import javax.transaction.Transactional
 
 @Transactional
 @Service
-class SaleService(private val saleRepository: br.com.api.kotlin.repository.SaleRepository) {
+class SaleService(private val saleRepository: SaleRepository) {
 
 
-    fun List(): MutableList<br.com.api.kotlin.entity.Sale> {
+    fun List(): MutableList<Sale> {
         return saleRepository.findAll()
     }
 
-    fun save(sale: br.com.api.kotlin.entity.Sale) {
+    fun save(sale: Sale) {
         sale.saleDate = Date()
-        if (sale.paymentType!!.equals(br.com.api.kotlin.enumerator.PaymentType.APRAZO)) {
-            val juros: Double
-            val taxa: Double = 0.10
-            val tempo: Double = 30.0
+        if (sale.paymentType == ("APRAZO")) {
 
-            juros = (sale.saleValue!! * taxa) * tempo
+            sale.saleValue
+            val porcentage: Double = 0.10 / 100.00
+            val total = sale.saleValue!! + (porcentage * sale.saleValue!!)
+            sale.saleValue = total
         }
-
-        println(sale.saleValue)
         saleRepository.save(sale)
 
     }
 
     fun findByClientName(clientName: String?): Any {
-    return saleRepository.findByName(clientName)
+        return saleRepository.findByName(clientName)
+    }
+
+    fun deleteSale(id: Long): Any {
+        val del: Optional<Sale> = saleRepository.findById(id)
+        if (saleRepository.existsById(id)) {
+            saleRepository.delete(del.get())
+            return "Encontrado."
+        }
+        return "ID não encontrado"
     }
 
 

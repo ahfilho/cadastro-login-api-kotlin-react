@@ -37,13 +37,13 @@ class ClientService(private val clientRepository: br.com.api.kotlin.repository.C
     }
 
     fun deleteClient(id: Long) {
-        val del: Optional<br.com.api.kotlin.entity.Client> = clientRepository.findById(id)
+        val del: Optional<Client> = clientRepository.findById(id)
         if (clientRepository.existsById(id))
             clientRepository.delete(del.get())
 
     }
 
-    fun findByCpf(cpf: String?): Optional<br.com.api.kotlin.entity.Client> {
+    fun findByCpf(cpf: String?): Optional<Client> {
         return clientRepository.findByCpf(cpf)
 
     }
