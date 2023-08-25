@@ -16,33 +16,33 @@ class Ssd {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "id")
+    @Column(name = "ID")
     val id: Long? = null
 
-    @Column(name = "brand")
+    @Column(name = "BRAND")
     var brand: String? = null
 
-    @Column(name = "serial_number", length = 17)
+    @Column(name = "SERIAL_NUMBER", length = 17)
     var serialNumber: String? = null
 
-    @Column(name = "size_storage", length = 3)
+    @Column(name = "SIZE_STORAGE", length = 3)
     var size: Int? = null
 
-    @Column(name = "purchase_price")
+    @Column(name = "PURCHASE_PRICE")
     var purchasePrice: Double? = null
 
-    @Column(name = "purchase_date")
+    @Column(name = "PURCHASE_DATE")
     var purchaseDate: LocalDate? = null
 
-    @Column(name = "sale_value")
+    @Column(name = "SALE_VALUE")
     var saleValue: Float? = null
 
-    @Column(name = "arrival_date")
+    @Column(name = "ARRIVAL_DATE")
     var arrivalDate: LocalDate? = null
 
-    @Column(name = "actual_date")
+    @Column(name = "ACTUAL_DATE")
     var actualDate: LocalDate? = null
 
-    @Column(name = "sale_date")
+    @Column(name = "SALE_DATE")
     var saleDate: LocalDate? = null
 }
