@@ -14,6 +14,7 @@ import javax.persistence.Table
 @Table(name = "hd_ssd")
 class Ssd {
 
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "ID")
@@ -45,4 +46,8 @@ class Ssd {
 
     @Column(name = "SALE_DATE")
     var saleDate: LocalDate? = null
+
+    @Column(name = "CONDITION")
+    var condition: String? = null
+
 }

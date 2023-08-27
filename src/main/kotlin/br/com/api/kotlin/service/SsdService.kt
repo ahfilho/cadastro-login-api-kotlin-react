@@ -1,6 +1,7 @@
 package br.com.api.kotlin.service
 
 import br.com.api.kotlin.entity.Ssd
+import br.com.api.kotlin.enumerator.Condition
 import br.com.api.kotlin.repository.SsdRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -17,10 +18,15 @@ class HdSsdService(private val ssdRepository: br.com.api.kotlin.repository.SsdRe
 //    @Autowired
 //    lateinit var ssdRepository: SsdRepository
 
-    fun save(hdssd: br.com.api.kotlin.entity.Ssd): br.com.api.kotlin.entity.Ssd {
+    fun save(hdssd: Ssd): Ssd {
 
         hdssd.arrivalDate = LocalDate.now()
         hdssd.actualDate = LocalDate.now()
+        if (hdssd.condition.equals("NEW")) {
+            hdssd.condition = Condition.NEW.toString()
+        } else {
+            hdssd.condition = Condition.USED.toString()
+        }
         ssdRepository.save(hdssd)
         return hdssd
     }
