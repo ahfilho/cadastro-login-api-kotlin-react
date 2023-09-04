@@ -1,7 +1,7 @@
-package br.com.api.kotlin.service
+package com.example.demo.service
 
-import br.com.api.kotlin.entity.Ssd
-import br.com.api.kotlin.repository.SsdRepository
+import com.example.demo.entity.Ssd
+import com.example.demo.repository.SsdRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.time.LocalDate
@@ -12,12 +12,12 @@ import javax.transaction.Transactional
 
 @Service
 @Transactional
-class HdSsdService(private val ssdRepository: br.com.api.kotlin.repository.SsdRepository) {
+class HdSsdService(private val ssdRepository: SsdRepository) {
 
 //    @Autowired
 //    lateinit var ssdRepository: SsdRepository
 
-    fun save(hdssd: br.com.api.kotlin.entity.Ssd): br.com.api.kotlin.entity.Ssd {
+    fun save(hdssd: Ssd): Ssd {
 
         hdssd.arrivalDate = LocalDate.now()
         hdssd.actualDate = LocalDate.now()
@@ -25,25 +25,25 @@ class HdSsdService(private val ssdRepository: br.com.api.kotlin.repository.SsdRe
         return hdssd
     }
 
-    fun List(): MutableList<br.com.api.kotlin.entity.Ssd> {
+    fun List(): MutableList<Ssd> {
 
         return this.ssdRepository.findAll()
     }
 
     fun delete(id: Long) {
-        val del: Optional<br.com.api.kotlin.entity.Ssd> = ssdRepository.findById(id)
+        val del: Optional<Ssd> = ssdRepository.findById(id)
         if (ssdRepository.existsById(id))
             ssdRepository.delete(del.get())
 
     }
 
-    fun teste(): List<br.com.api.kotlin.entity.Ssd> {
+    fun teste(): List<Ssd> {
         return this.ssdRepository.checaTeste()
     }
 
     //TODO TERMINAR
-    fun updateSsd(id: Long, ssd: br.com.api.kotlin.entity.Ssd): br.com.api.kotlin.entity.Ssd {
-        val oldObject: br.com.api.kotlin.entity.Ssd = ssdRepository.getById(id)
+    fun updateSsd(id: Long, ssd: Ssd): Ssd {
+        val oldObject: Ssd = ssdRepository.getById(id)
 
         if (ssdRepository.existsById(id)) {
             oldObject.brand = ssd.brand
