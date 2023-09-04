@@ -33,10 +33,10 @@ class Client {
 
     @OneToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
     @JoinColumn(name = "CLIENT_ID")
-    val address: br.com.api.kotlin.entity.Address? = null
+    val address: Address? = null
 
 
     @OneToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
     @JoinColumn(name = "SALE_ID")
-    val sale: br.com.api.kotlin.entity.Sale? = null
+    val sale: Sale? = null
 }

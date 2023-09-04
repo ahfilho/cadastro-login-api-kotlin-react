@@ -5,16 +5,27 @@ import br.com.api.kotlin.repository.ClientRepository
 import org.springframework.stereotype.Service
 import java.util.*
 import javax.transaction.Transactional
+import kotlin.Comparator
 
 @Service
 @Transactional
-class ClientService(private val clientRepository: br.com.api.kotlin.repository.ClientRepository) {
+class ClientService(private val clientRepository: ClientRepository) {
 
-    fun List(): MutableList<br.com.api.kotlin.entity.Client> {
-        return clientRepository.findAll()
+    fun list(): MutableList<Client> {
+        var listOfClients = clientRepository.findAll()
+        listOfClients.sortBy { it.name }
+        for (client in listOfClients) {
+            client.address?.client
+        }
+        if (listOfClients.isEmpty()) {
+            println("Não existe cliente cadastrado.")
+        }
+        return listOfClients
+
     }
 
-    fun saveClient(client: br.com.api.kotlin.entity.Client) {
+
+    fun saveClient(client: Client) {
 
         findByCpf(client.cpf)
 
@@ -22,10 +33,10 @@ class ClientService(private val clientRepository: br.com.api.kotlin.repository.C
         clientRepository.save(client)
     }
 
-    fun updateClient(id: Long, client: br.com.api.kotlin.entity.Client): br.com.api.kotlin.entity.Client {
+    fun updateClient(id: Long, client: Client): Client {
         val searchForUpdate = clientRepository.findById(id)
         if (searchForUpdate.isPresent) {
-            val objClient: br.com.api.kotlin.entity.Client = searchForUpdate.get()
+            val objClient: Client = searchForUpdate.get()
             objClient.name = client.name
             objClient.cpf = client.cpf
             objClient.phone = client.phone
@@ -50,4 +61,6 @@ class ClientService(private val clientRepository: br.com.api.kotlin.repository.C
 
 
 }
+
+
 

@@ -20,7 +20,7 @@ class ClientController(private val clientService: ClientService) {
 
     @GetMapping
     fun list(): List<Client> {
-        return clientService.List()
+        return clientService.list()
     }
 
     @PostMapping

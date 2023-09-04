@@ -38,12 +38,12 @@ class SsdController(private val ssdService: br.com.api.kotlin.service.HdSsdServi
     //    lateinit var ssdService: HdSsdService
 
     @GetMapping
-    fun list(): List<br.com.api.kotlin.entity.Ssd> {
+    fun list(): List<Ssd> {
         return ssdService.List()
     }
 
     @PostMapping
-    fun save(@RequestBody ssd: br.com.api.kotlin.entity.Ssd): br.com.api.kotlin.entity.Ssd {
+    fun save(@RequestBody ssd:Ssd):Ssd {
         return this.ssdService.save(ssd)
     }
 
@@ -54,13 +54,13 @@ class SsdController(private val ssdService: br.com.api.kotlin.service.HdSsdServi
     }
 
     @PutMapping("/{id}")
-    fun update(@PathVariable id: Long?, @RequestBody ssd: br.com.api.kotlin.entity.Ssd): ResponseEntity<br.com.api.kotlin.entity.Ssd?>? {
+    fun update(@PathVariable id: Long?, @RequestBody ssd:Ssd): ResponseEntity<Ssd?>? {
         ssd.id
         return ResponseEntity.ok().body(ssdService.updateSsd(id!!, ssd))
     }
 
     @GetMapping("/teste")
-    fun teste(): List<br.com.api.kotlin.entity.Ssd> {
+    fun teste(): List<Ssd> {
         return ssdService.teste()
     }
 
