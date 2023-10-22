@@ -1,8 +1,7 @@
 package com.example.demo.controller
 
-import com.example.demo.dto.ClientDto
-import com.example.demo.entity.Client
-import com.example.demo.service.ClientService
+import br.com.api.kotlin.entity.Client
+import br.com.api.kotlin.service.ClientService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
@@ -20,7 +19,7 @@ class ClientController(private val clientService: ClientService) {
 
     @GetMapping
     fun list(): List<Client> {
-        return clientService.List()
+        return clientService.list()
     }
 
     @PostMapping

@@ -1,7 +1,7 @@
 package com.example.demo.controller
 
+import br.com.api.kotlin.entity.Ssd
 import com.example.demo.service.HdSsdService
-import com.example.demo.entity.Ssd
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity

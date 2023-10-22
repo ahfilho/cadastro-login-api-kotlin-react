@@ -1,6 +1,7 @@
-package com.example.demo.entity
+package br.com.api.kotlin.entity
 
 
+import br.com.api.kotlin.entity.Address
 import java.util.*
 import javax.persistence.*
 

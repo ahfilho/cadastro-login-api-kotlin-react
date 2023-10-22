@@ -25,8 +25,7 @@ class Address {
 
     @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "CLIENT_ID")
-    val client: br.com.api.kotlin.entity.Client? = null
-
+    @JoinColumn(name = "ADDRESS_ID")
+    val client: Client? = null
 
 }

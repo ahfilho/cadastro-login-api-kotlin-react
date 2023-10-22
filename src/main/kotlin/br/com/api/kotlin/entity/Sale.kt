@@ -41,7 +41,7 @@ class Sale {
     @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CLIENT_ID")
-    val client: br.com.api.kotlin.entity.Client? = null
+    val client: Client? = null
 
     @Column(name="SALE_CODE")
     var saleCode: String? = null

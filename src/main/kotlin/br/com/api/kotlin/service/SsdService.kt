@@ -1,7 +1,7 @@
 package com.example.demo.service
 
-import com.example.demo.entity.Ssd
-import com.example.demo.repository.SsdRepository
+import br.com.api.kotlin.entity.Ssd
+import br.com.api.kotlin.repository.SsdRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.time.LocalDate
