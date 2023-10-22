@@ -1,12 +1,12 @@
 package br.com.api.kotlin.controller
 
 import br.com.api.kotlin.code.GeneratorCode
-import br.com.api.kotlin.entity.Sale
-import br.com.api.kotlin.service.SaleService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
+import br.com.api.kotlin.entity.Sale
+import br.com.api.kotlin.service.SaleService
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -19,13 +19,10 @@ class SaleController(
     private val saleService: SaleService,
     private val generatorCode: GeneratorCode,
 ) {
-
-    @GetMapping
     fun list(): List<Sale> {
         return saleService.List()
     }
 
-    @PostMapping
     fun save(@RequestBody sale: Sale): ResponseEntity<Any> {
 
         val codeSize = 10
@@ -53,7 +50,6 @@ class SaleController(
             println("Código da Venda:$codeFinal")
             println("==========================")
             saleService.save(sale)
-
             return ResponseEntity.status(HttpStatus.OK).body("Venda realizada com sucesso.")
         } catch (e: Exception) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Venda não realizada.")

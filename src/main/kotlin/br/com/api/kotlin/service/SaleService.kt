@@ -12,7 +12,6 @@ import javax.transaction.Transactional
 @Service
 class SaleService(private val saleRepository: SaleRepository) {
 
-
     fun List(): MutableList<Sale> {
         return saleRepository.findAll()
     }

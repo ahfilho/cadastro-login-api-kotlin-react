@@ -1,7 +1,6 @@
-package br.com.api.kotlin.service
+package com.example.demo.service
 
 import br.com.api.kotlin.entity.Ssd
-import br.com.api.kotlin.enumerator.Condition
 import br.com.api.kotlin.repository.SsdRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -22,11 +21,6 @@ class HdSsdService(private val ssdRepository: SsdRepository) {
 
         hdssd.arrivalDate = LocalDate.now()
         hdssd.actualDate = LocalDate.now()
-        if (hdssd.condition.equals("NEW")) {
-            hdssd.condition = Condition.NEW.toString()
-        } else {
-            hdssd.condition = Condition.USED.toString()
-        }
         ssdRepository.save(hdssd)
         return hdssd
     }

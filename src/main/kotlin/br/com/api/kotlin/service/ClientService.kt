@@ -5,7 +5,6 @@ import br.com.api.kotlin.repository.ClientRepository
 import org.springframework.stereotype.Service
 import java.util.*
 import javax.transaction.Transactional
-import kotlin.Comparator
 
 @Service
 @Transactional
@@ -24,9 +23,7 @@ class ClientService(private val clientRepository: ClientRepository) {
 
     }
 
-
     fun saveClient(client: Client) {
-
         findByCpf(client.cpf)
 
         client.dateRegister = Date()
@@ -55,12 +52,8 @@ class ClientService(private val clientRepository: ClientRepository) {
     }
 
     fun findByCpf(cpf: String?): Optional<Client> {
-        return clientRepository.findByCpf(cpf)
+            return clientRepository.findByCpf(cpf)
 
     }
-
-
 }
-
-
 
