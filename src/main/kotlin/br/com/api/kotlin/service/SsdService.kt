@@ -1,4 +1,4 @@
-package com.example.demo.service
+package br.com.api.kotlin.service
 
 import br.com.api.kotlin.entity.Ssd
 import br.com.api.kotlin.repository.SsdRepository

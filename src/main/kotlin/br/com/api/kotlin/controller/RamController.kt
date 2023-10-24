@@ -17,23 +17,20 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/ram")
-class RamController(private val ramService: br.com.api.kotlin.service.RamService) {
-
-//@Autowired
-//lateinit var ramService: RamService;
+class RamController(private val ramService: RamService) {
 
     @PostMapping
-    fun save(@RequestBody ram: br.com.api.kotlin.entity.Ram): br.com.api.kotlin.entity.Ram? {
+    fun save(@RequestBody ram: Ram): Ram? {
         return ramService.saveRam(ram);
     }
 
     @GetMapping
-    fun list(): List<br.com.api.kotlin.entity.Ram> {
+    fun list(): List<Ram> {
         return ramService.listALl();
     }
 
     @PutMapping("/{id}")
-    fun update(@PathVariable id: Long?, @RequestBody ram: br.com.api.kotlin.entity.Ram): ResponseEntity<br.com.api.kotlin.entity.Ram?>? {
+    fun update(@PathVariable id: Long?, @RequestBody ram: Ram): ResponseEntity<Ram?>? {
         ram.id
         return ResponseEntity.ok().body(ramService.update(id!!, ram))
     }

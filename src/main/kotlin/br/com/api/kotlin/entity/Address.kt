@@ -12,16 +12,16 @@ class Address {
     val id: Long? = null
 
     @Column(name = "STREET")
-    val street: String? = null
+    var street: String? = null
 
     @Column(name = "NUMBER")
-    val number: String? = null
+    var number: String? = null
 
     @Column(name = "DISTRICT")
-    val district: String? = null
+    var district: String? = null
 
     @Column(name = "CITY")
-    val city: String? = null
+    var city: String? = null
 
     @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)

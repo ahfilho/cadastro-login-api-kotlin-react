@@ -1,9 +1,10 @@
 package br.com.api.kotlin.entity
 
 
-import br.com.api.kotlin.entity.Address
 import java.util.*
 import javax.persistence.*
+import javax.validation.constraints.NotNull
+import javax.validation.constraints.Size
 
 
 @Entity
@@ -15,15 +16,20 @@ class Client {
     @Column(name = "ID")
     var id: Long? = null
 
+    @NotNull
     @Column(name = "NAME")
     var name: String? = null
 
+    @NotNull
+    @Size(min = 10, max = 11)
     @Column(name = "PHONE")
-    var phone: Int? = null
+    var phone: String? = null
 
+    @NotNull
     @Column(name = "CPF")
     var cpf: String? = null
 
+    @NotNull
     @Column(name = "DATE_REGISTER")
     var dateRegister: Date? = null
 

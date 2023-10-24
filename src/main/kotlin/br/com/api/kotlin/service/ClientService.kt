@@ -1,6 +1,8 @@
 package br.com.api.kotlin.service
 
+import br.com.api.kotlin.entity.Address
 import br.com.api.kotlin.entity.Client
+import br.com.api.kotlin.repository.AddressRepository
 import br.com.api.kotlin.repository.ClientRepository
 import org.springframework.stereotype.Service
 import java.util.*
@@ -8,10 +10,10 @@ import javax.transaction.Transactional
 
 @Service
 @Transactional
-class ClientService(private val clientRepository: ClientRepository) {
+class ClientService(private val clientRepository: ClientRepository, private val addressRepository: AddressRepository) {
 
     fun list(): MutableList<Client> {
-        var listOfClients = clientRepository.findAll()
+        val listOfClients = clientRepository.findAll()
         listOfClients.sortBy { it.name }
         for (client in listOfClients) {
             client.address?.client
@@ -24,14 +26,15 @@ class ClientService(private val clientRepository: ClientRepository) {
     }
 
     fun saveClient(client: Client) {
-        findByCpf(client.cpf)
+        clientRepository.findByCpf(client.cpf)
 
         client.dateRegister = Date()
         clientRepository.save(client)
     }
 
-    fun updateClient(id: Long, client: Client): Client {
+    fun updateClient(id: Long, client: Client, address: Address): Client {
         val searchForUpdate = clientRepository.findById(id)
+        val addresUpdate = addressRepository.findById(id);
         if (searchForUpdate.isPresent) {
             val objClient: Client = searchForUpdate.get()
             objClient.name = client.name
@@ -40,8 +43,23 @@ class ClientService(private val clientRepository: ClientRepository) {
             objClient.dateRegister = Date();
             println(objClient.dateRegister)
 
+            clientRepository.save(objClient)
+
         }
+
+        if (addresUpdate.isPresent) {
+            val addressEdit: Address = addresUpdate.get()
+            addressEdit.city = address.city
+            addressEdit.district = address.district
+            addressEdit.number = address.number
+            addressEdit.street = address.street
+
+            addressRepository.save(addressEdit)
+
+        }
+
         return client
+
     }
 
     fun deleteClient(id: Long) {
@@ -52,8 +70,10 @@ class ClientService(private val clientRepository: ClientRepository) {
     }
 
     fun findByCpf(cpf: String?): Optional<Client> {
-            return clientRepository.findByCpf(cpf)
+        return clientRepository.findByCpf(cpf)
 
     }
 }
+
+
 
