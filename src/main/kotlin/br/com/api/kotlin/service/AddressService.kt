@@ -7,13 +7,13 @@ import javax.transaction.Transactional
 
 @Service
 @Transactional
-class AddressService (private val addressRepository: br.com.api.kotlin.repository.AddressRepository){
+class AddressService (private val addressRepository: AddressRepository){
 
 
-    fun saveAddres(address: br.com.api.kotlin.entity.Address): br.com.api.kotlin.entity.Address {
+    fun saveAddres(address: Address): Address {
       return  addressRepository.save(address)
     }
-    fun List(): MutableList<br.com.api.kotlin.entity.Address>{
+    fun List(): MutableList<Address>{
        return addressRepository.findAll()
     }
 

@@ -10,13 +10,13 @@ import java.util.*
 
 @RestController
 @RequestMapping("/cpu")
-class CpuController(private val cpuService: br.com.api.kotlin.service.CpuService) {
+class CpuController(private val cpuService: CpuService) {
 
 //    @Autowired
 //    lateinit var cpuService: CpuService
 
     @PostMapping
-    fun save(@RequestBody cpu: br.com.api.kotlin.entity.Cpu): ResponseEntity<Any> { //response.. ANY - retorna alguma coisa, seja qual for
+    fun save(@RequestBody cpu: Cpu): ResponseEntity<Any> { //response.. ANY - retorna alguma coisa, seja qual for
         try {
             cpuService.saveCpu(cpu)
             return ResponseEntity.status(HttpStatus.OK).body("SALVO COM SUCESSO!")
@@ -32,7 +32,7 @@ class CpuController(private val cpuService: br.com.api.kotlin.service.CpuService
 
     //TODO
     @PutMapping("/{id}")
-    fun update(@PathVariable id: Long?, @RequestBody cpu: br.com.api.kotlin.entity.Cpu): ResponseEntity<br.com.api.kotlin.entity.Cpu?>? {
+    fun update(@PathVariable id: Long?, @RequestBody cpu: Cpu): ResponseEntity<Cpu?>? {
         return ResponseEntity.ok().body(cpuService.updateCpu(id!!, cpu))
     }
 

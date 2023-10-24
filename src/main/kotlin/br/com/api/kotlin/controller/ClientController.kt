@@ -1,5 +1,6 @@
-package com.example.demo.controller
+package br.com.api.kotlin.controller
 
+import br.com.api.kotlin.entity.Address
 import br.com.api.kotlin.entity.Client
 import br.com.api.kotlin.service.ClientService
 import org.springframework.http.HttpStatus
@@ -29,9 +30,9 @@ class ClientController(private val clientService: ClientService) {
     }
 
     @PutMapping("/{id}")
-    fun updateClient(@PathVariable id: Long?, @RequestBody client: Client): ResponseEntity<Client?>? {
+    fun updateClient(@PathVariable id: Long?, @RequestBody client: Client, address: Address): ResponseEntity<Client?>? {
         client.id
-        return ResponseEntity.ok().body(clientService.updateClient(id!!, client))
+        return ResponseEntity.ok().body(client.address?.let { clientService.updateClient(id!!, client, it) })
     }
 
     @DeleteMapping("/{id}")
