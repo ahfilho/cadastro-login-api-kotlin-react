@@ -16,13 +16,13 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/sale")
 @RestController
 class SaleController(
-    private val saleService: SaleService,
-    private val generatorCode: GeneratorCode,
+    private val saleService: SaleService, private val generatorCode: GeneratorCode,
 ) {
     fun list(): List<Sale> {
         return saleService.List()
     }
 
+    @PostMapping
     fun save(@RequestBody sale: Sale): ResponseEntity<Any> {
 
         val codeSize = 10
