@@ -1,5 +1,6 @@
 package br.com.api.kotlin.controller
 
+import br.com.api.kotlin.dto.SsdDto
 import br.com.api.kotlin.entity.Ssd
 import br.com.api.kotlin.service.HdSsdService
 import org.springframework.beans.factory.annotation.Autowired
@@ -37,8 +38,8 @@ class SsdController(private val ssdService: HdSsdService) {
     }
 
     @PostMapping
-    fun save(@RequestBody ssd: Ssd): Ssd {
-        return this.ssdService.save(ssd)
+    fun save(@RequestBody ssdDto: SsdDto): Ssd {
+        return this.ssdService.save(ssdDto)
     }
 
     @DeleteMapping("/{id}")

@@ -42,7 +42,6 @@ class ClientService(private val clientRepository: ClientRepository, private val 
             objClient.phone = client.phone
             objClient.dateRegister = Date();
             println(objClient.dateRegister)
-
             clientRepository.save(objClient)
 
         }
@@ -53,7 +52,6 @@ class ClientService(private val clientRepository: ClientRepository, private val 
             addressEdit.district = address.district
             addressEdit.number = address.number
             addressEdit.street = address.street
-
             addressRepository.save(addressEdit)
 
         }

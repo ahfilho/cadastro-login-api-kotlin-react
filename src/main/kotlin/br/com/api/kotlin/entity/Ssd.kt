@@ -1,8 +1,6 @@
 package br.com.api.kotlin.entity
 
-import java.math.BigDecimal
 import java.time.LocalDate
-import java.util.Date
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
@@ -42,7 +40,7 @@ class Ssd {
     var arrivalDate: LocalDate? = null
 
     @Column(name = "ACTUAL_DATE")
-    var actualDate: LocalDate? = null
+    var currentDate: LocalDate? = null
 
     @Column(name = "SALE_DATE")
     var saleDate: LocalDate? = null

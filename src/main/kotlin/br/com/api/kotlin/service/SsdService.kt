@@ -1,12 +1,10 @@
 package br.com.api.kotlin.service
 
+import br.com.api.kotlin.dto.SsdDto
 import br.com.api.kotlin.entity.Ssd
 import br.com.api.kotlin.repository.SsdRepository
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.time.LocalDate
-import java.time.LocalDateTime
-import java.util.Calendar
 import java.util.Optional
 import javax.transaction.Transactional
 
@@ -17,12 +15,29 @@ class HdSsdService(private val ssdRepository: SsdRepository) {
 //    @Autowired
 //    lateinit var ssdRepository: SsdRepository
 
-    fun save(hdssd: Ssd): Ssd {
+    private fun convertEntity(ssdDto: SsdDto): Ssd {
 
-        hdssd.arrivalDate = LocalDate.now()
-        hdssd.actualDate = LocalDate.now()
-        ssdRepository.save(hdssd)
-        return hdssd
+        var ssd = Ssd()
+        ssd.brand = ssdDto.brand
+        ssd.serialNumber = ssdDto.serialNumber
+        ssd.size = ssdDto.size
+//        ssd.purchasePrice = ssdDto.purchasePrice
+//        ssd.purchaseDate = ssdDto.purchaseDate
+//        ssd.saleValue = ssdDto.saleValue
+        ssd.arrivalDate = ssdDto.arrivalDate
+        ssd.currentDate = ssdDto.currentDate
+        ssd.saleDate = ssdDto.saleDate
+        ssd.condition = ssdDto.condition
+        return ssd
+    }
+
+    fun save(ssdDto: SsdDto): Ssd {
+        val convertEntityToDto = convertEntity(ssdDto)
+        convertEntityToDto.arrivalDate = LocalDate.now()
+        convertEntityToDto.currentDate = LocalDate.now()
+
+        ssdRepository.save(convertEntityToDto)
+        return convertEntityToDto
     }
 
     fun List(): MutableList<Ssd> {
@@ -43,7 +58,7 @@ class HdSsdService(private val ssdRepository: SsdRepository) {
 
     //TODO TERMINAR
     fun updateSsd(id: Long, ssd: Ssd): Ssd {
-        val oldObject: Ssd = ssdRepository.getById(id)
+        val oldObject = ssdRepository.getById(id)
 
         if (ssdRepository.existsById(id)) {
             oldObject.brand = ssd.brand
