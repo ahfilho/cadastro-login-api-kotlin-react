@@ -1,5 +1,7 @@
 package br.com.api.kotlin.controller
 
+import br.com.api.kotlin.dto.AddressDto
+import br.com.api.kotlin.dto.ClientDto
 import br.com.api.kotlin.entity.Address
 import br.com.api.kotlin.entity.Client
 import br.com.api.kotlin.service.ClientService
@@ -24,9 +26,9 @@ class ClientController(private val clientService: ClientService) {
     }
 
     @PostMapping
-    fun save(@RequestBody client: Client): ResponseEntity<Any> {
-       clientService.saveClient(client)
-        return ResponseEntity.status(HttpStatus.OK).body(/* body = */ "Cliente " + client.name + " salvo com sucesso!")
+    fun save(@RequestBody clientDto: ClientDto): ResponseEntity<Any> {
+        clientService.saveClient(clientDto)
+        return ResponseEntity.status(HttpStatus.OK).body(/* body = */ "Cliente " + clientDto.name + " salvo com sucesso!")
     }
 
     @PutMapping("/{id}")

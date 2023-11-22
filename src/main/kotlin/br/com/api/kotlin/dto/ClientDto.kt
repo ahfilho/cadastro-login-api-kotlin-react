@@ -4,11 +4,13 @@ import java.util.*
 import javax.persistence.*
 
 
-
-class ClientDto(
-
-    var name: String?,
-    var phone: Int?,
-    var dateRegister: Date?
+data class ClientDto(
+    val name: String?,
+    val phone: String?,
+    val dateRegister: Date?,
+    val cpf: String?,
+    val address: AddressDto? = null
 )
+
+
 

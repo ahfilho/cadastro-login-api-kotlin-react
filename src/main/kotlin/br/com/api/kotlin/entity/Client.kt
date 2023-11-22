@@ -6,14 +6,12 @@ import javax.persistence.*
 import javax.validation.constraints.NotNull
 import javax.validation.constraints.Size
 
-
 @Entity
 @Table(name = "CLIENT")
 class Client {
-
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "ID")
+    @Column(name = "CLIENT_ID")
     var id: Long? = null
 
     @NotNull
@@ -34,7 +32,6 @@ class Client {
     var dateRegister: Date? = null
 
     @OneToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
-    @JoinColumn(name = "CLIENT_ID")
-    val address: Address? = null
-
+    @JoinColumn(name = "ADDRESS_ID")
+    var address: Address? = null
 }

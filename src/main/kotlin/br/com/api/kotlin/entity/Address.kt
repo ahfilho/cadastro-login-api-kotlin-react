@@ -6,9 +6,9 @@ import javax.persistence.*
 @Entity
 @Table(name = "ADDRESS")
 class Address {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ADDRESS_ID")
     val id: Long? = null
 
     @Column(name = "STREET")
@@ -24,8 +24,7 @@ class Address {
     var city: String? = null
 
     @JsonIgnore
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ADDRESS_ID")
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "CLIENT_ID")
     val client: Client? = null
-
 }

@@ -15,9 +15,9 @@ class HdSsdService(private val ssdRepository: SsdRepository) {
 //    @Autowired
 //    lateinit var ssdRepository: SsdRepository
 
-    private fun convertEntity(ssdDto: SsdDto): Ssd {
+    private fun convertEntitySsd(ssdDto: SsdDto): Ssd {
 
-        var ssd = Ssd()
+        val ssd = Ssd()
         ssd.brand = ssdDto.brand
         ssd.serialNumber = ssdDto.serialNumber
         ssd.size = ssdDto.size
@@ -32,7 +32,7 @@ class HdSsdService(private val ssdRepository: SsdRepository) {
     }
 
     fun save(ssdDto: SsdDto): Ssd {
-        val convertEntityToDto = convertEntity(ssdDto)
+        val convertEntityToDto = convertEntitySsd(ssdDto)
         convertEntityToDto.arrivalDate = LocalDate.now()
         convertEntityToDto.currentDate = LocalDate.now()
 
