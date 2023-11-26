@@ -16,7 +16,7 @@ class CpuController(private val cpuService: CpuService) {
 //    lateinit var cpuService: CpuService
 
     @PostMapping
-    fun save(@RequestBody cpu: Cpu): ResponseEntity<Any> { //response.. ANY - retorna alguma coisa, seja qual for
+    fun save(@RequestBody cpu: Cpu): ResponseEntity<Any> {
         try {
             cpuService.saveCpu(cpu)
             return ResponseEntity.status(HttpStatus.OK).body("SALVO COM SUCESSO!")
@@ -26,7 +26,7 @@ class CpuController(private val cpuService: CpuService) {
     }
 
     @GetMapping
-    fun list(): List<br.com.api.kotlin.entity.Cpu> {
+    fun list(): List<Cpu> {
         return cpuService.List()
     }
 
