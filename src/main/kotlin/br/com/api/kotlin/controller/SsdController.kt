@@ -2,8 +2,7 @@ package br.com.api.kotlin.controller
 
 import br.com.api.kotlin.dto.SsdDto
 import br.com.api.kotlin.entity.Ssd
-import br.com.api.kotlin.service.HdSsdService
-import org.springframework.beans.factory.annotation.Autowired
+import br.com.api.kotlin.service.SsdService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -11,7 +10,7 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("/ssd")
 
-class SsdController(private val ssdService: HdSsdService) {
+class SsdController(private val ssdService: SsdService) {
 
     //    Constructor injection: permite testar se a instância que estamos tentando injetar está nula,
     //    famoso NullPointerException, enquanto @Autowired não.

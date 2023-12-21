@@ -18,9 +18,6 @@ import org.springframework.web.bind.annotation.RestController
 class SaleController(
     private val saleService: SaleService, private val generatorCode: GeneratorCode,
 ) {
-    fun list(): List<Sale> {
-        return saleService.List()
-    }
 
     @PostMapping
     fun save(@RequestBody sale: Sale): ResponseEntity<Any> {
@@ -40,11 +37,11 @@ class SaleController(
             println("======= Nota Fiscal =======")
             if (sale.clientName.equals("")) {
                 println("Nome: Não informado na venda.")
-//                sale.clientName = ("Não informado na venda.")
+            } else {
+                println("Nome: ${sale.clientName}")
             }
-            println("Nome: ${sale.clientName}")
             println("Tipo de Cartão: ${sale.typeCard} ")
-            println("Peso: ${sale.weight} kg")
+            println("Peso: ${sale.weigth} kg")
             println("Data da Venda: ${sale.saleDate} ")
             println("Valor da Venda: R$${sale.saleValue}")
             println("Código da Venda:$codeFinal")
@@ -54,6 +51,11 @@ class SaleController(
         } catch (e: Exception) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Venda não realizada.")
         }
+    }
+
+    @GetMapping
+    fun list(): List<Sale> {
+        return saleService.List()
     }
 
     @DeleteMapping("/{id}")

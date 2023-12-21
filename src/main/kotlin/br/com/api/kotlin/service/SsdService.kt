@@ -10,7 +10,7 @@ import javax.transaction.Transactional
 
 @Service
 @Transactional
-class HdSsdService(private val ssdRepository: SsdRepository) {
+class SsdService(private val ssdRepository: SsdRepository) {
 
 //    @Autowired
 //    lateinit var ssdRepository: SsdRepository

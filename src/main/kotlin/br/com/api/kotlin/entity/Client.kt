@@ -1,6 +1,7 @@
 package br.com.api.kotlin.entity
 
 
+import java.time.LocalDate
 import java.util.*
 import javax.persistence.*
 import javax.validation.constraints.NotNull
@@ -29,7 +30,7 @@ class Client {
 
     @NotNull
     @Column(name = "DATE_REGISTER")
-    var dateRegister: Date? = null
+    var dateRegister: LocalDate? = null
 
     @OneToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
     @JoinColumn(name = "ADDRESS_ID")

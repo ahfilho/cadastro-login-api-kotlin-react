@@ -8,6 +8,7 @@ import br.com.api.kotlin.repository.AddressRepository
 import br.com.api.kotlin.repository.ClientRepository
 import org.springframework.stereotype.Service
 import java.lang.RuntimeException
+import java.time.LocalDate
 import java.util.*
 import javax.transaction.Transactional
 
@@ -55,12 +56,12 @@ class ClientService(private val clientRepository: ClientRepository, private val 
     fun saveClient(clientDto: ClientDto) {
 
         val searchByCpf = clientRepository.findByCpf(clientDto.cpf)
-        if (searchByCpf != null) {
+        if (searchByCpf.isPresent) {
             throw RuntimeException("Já existe um cliente com o CPF fornecido.")
         } else {
-            val convertEntityForDto = convertEntityClient(clientDto)
-            convertEntityForDto.dateRegister = Date()
-            clientRepository.save(convertEntityForDto)
+            val convertDtoForEntity = convertEntityClient(clientDto)
+            convertDtoForEntity.dateRegister = LocalDate.now()
+            clientRepository.save(convertDtoForEntity)
         }
     }
 
@@ -73,7 +74,7 @@ class ClientService(private val clientRepository: ClientRepository, private val 
             objClient.name = client.name
             objClient.cpf = client.cpf
             objClient.phone = client.phone
-            objClient.dateRegister = Date();
+            objClient.dateRegister = LocalDate.now()
             println(objClient.dateRegister)
             clientRepository.save(objClient)
 
