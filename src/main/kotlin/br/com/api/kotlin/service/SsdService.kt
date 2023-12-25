@@ -41,7 +41,6 @@ class SsdService(private val ssdRepository: SsdRepository) {
     }
 
     fun List(): MutableList<Ssd> {
-
         return this.ssdRepository.findAll()
     }
 
