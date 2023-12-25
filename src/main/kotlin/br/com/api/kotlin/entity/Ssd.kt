@@ -1,12 +1,7 @@
 package br.com.api.kotlin.entity
 
 import java.time.LocalDate
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
-import javax.persistence.Table
+import javax.persistence.*
 
 @Entity
 @Table(name = "hd_ssd")
@@ -47,5 +42,9 @@ class Ssd {
 
     @Column(name = "CONDITION")
     var condition: String? = null
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+    @JoinColumn(name = "IMAGE_ID")
+    var image: Image? = null
 
 }
