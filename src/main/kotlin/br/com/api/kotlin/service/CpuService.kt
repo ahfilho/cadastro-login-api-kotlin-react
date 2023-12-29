@@ -9,30 +9,30 @@ import javax.transaction.Transactional
 
 @Service
 @Transactional
-class CpuService(private val cpuRepository: br.com.api.kotlin.repository.CpuRepository) {
+class CpuService(private val cpuRepository: CpuRepository) {
 
 //    @Autowired
 //    lateinit var cpuRepository: CpuRepository
 
-    fun saveCpu(cpu: br.com.api.kotlin.entity.Cpu): br.com.api.kotlin.entity.Cpu {
+    fun saveCpu(cpu: Cpu): Cpu {
         return this.cpuRepository.save(cpu)
     }
 
     fun deleteCpu(id: Long) {
-        val teste: Optional<br.com.api.kotlin.entity.Cpu> = cpuRepository.findById(id)
+        val teste: Optional<Cpu> = cpuRepository.findById(id)
         if (cpuRepository.existsById(id))
             cpuRepository.delete(teste.get())
     }
 
-    fun List(): MutableList<br.com.api.kotlin.entity.Cpu> {
+    fun List(): MutableList<Cpu> {
         return this.cpuRepository.findAll()
     }
 
     //TODO
-    fun updateCpu(id: Long, cpu: br.com.api.kotlin.entity.Cpu): br.com.api.kotlin.entity.Cpu {
+    fun updateCpu(id: Long, cpu: Cpu): Cpu {
         val a = cpuRepository.findById(id)
         if (a.isPresent) {
-            val c: br.com.api.kotlin.entity.Cpu = a.get()
+            val c: Cpu = a.get()
             c.brand = cpu.brand
             c.model = cpu.model
             c.serialNumber = cpu.serialNumber
