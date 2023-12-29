@@ -8,20 +8,20 @@ import javax.transaction.Transactional
 
 @Service
 @Transactional
-class RamService(private val ramRepository: br.com.api.kotlin.repository.RamRepository) {
+class RamService(private val ramRepository: RamRepository) {
 
 //    @Autowired
 //    lateinit var ramRepository: RamRepository
 
-    fun saveRam(ram: br.com.api.kotlin.entity.Ram): br.com.api.kotlin.entity.Ram? {
+    fun saveRam(ram: Ram): Ram? {
         return ramRepository.save(ram)
     }
 
-    fun listALl(): MutableList<br.com.api.kotlin.entity.Ram> {
+    fun listALl(): MutableList<Ram> {
         return ramRepository.findAll();
     }
 
-    fun update(id: Long, ram: br.com.api.kotlin.entity.Ram): br.com.api.kotlin.entity.Ram {
+    fun update(id: Long, ram: Ram): Ram {
         val u = ramRepository.findById(id).map {
             it.brand
             it.frequency
