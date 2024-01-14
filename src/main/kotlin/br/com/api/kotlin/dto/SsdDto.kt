@@ -5,15 +5,17 @@ import java.math.BigDecimal
 import java.time.LocalDate
 
 data class SsdDto(
-    val id: Long?,
-    val brand: String?,
-    val serialNumber: String?,
-    val size: Int?,
-    val purchasePrice: Double?,
-    val purchaseDate: LocalDate?,
-    val saleValue: Float?,
-    val arrivalDate: LocalDate?,
-    val currentDate: LocalDate?,
-    val saleDate: LocalDate?,
-    val condition: String?
+    var brand: String? = null,
+    var serialNumber: String? = null,
+    var size: Int? = null,
+    var purchasePrice: Double? = null,
+    var purchaseDate: LocalDate? = null,
+    var saleValue: Float? = null,
+    var arrivalDate: LocalDate? = null,
+    var currentDate: LocalDate? = null,
+    var saleDate: LocalDate? = null,
+    var condition: String? = null,
 )
+
+
+

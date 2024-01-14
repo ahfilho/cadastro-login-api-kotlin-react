@@ -34,7 +34,7 @@ class Ssd {
     @Column(name = "ARRIVAL_DATE")
     var arrivalDate: LocalDate? = null
 
-    @Column(name = "ACTUAL_DATE")
+    @Column(name = "ACTUALz_DATE")
     var currentDate: LocalDate? = null
 
     @Column(name = "SALE_DATE")
