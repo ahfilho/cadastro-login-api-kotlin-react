@@ -6,6 +6,7 @@ import br.com.api.kotlin.service.SsdService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import java.time.LocalDate
 
 @RestController
 @RequestMapping("/ssd")
@@ -30,15 +31,32 @@ class SsdController(private val ssdService: SsdService) {
 
     //    @Autowired
     //    lateinit var ssdService: HdSsdService
+    fun convertDtoToEntity(ssdDto: SsdDto): Ssd {
+        val ssd = Ssd()
+        ssd.brand = ssdDto.brand
+        ssd.serialNumber = ssdDto.serialNumber
+        ssd.size = ssdDto.size
+        ssd.purchasePrice = ssdDto.purchasePrice
+        ssd.purchaseDate = ssdDto.purchaseDate
+        ssd.saleValue = ssdDto.saleValue
+        ssd.arrivalDate = ssdDto.arrivalDate
+        ssd.currentDate = ssdDto.currentDate
+        ssd.saleDate = ssdDto.saleDate
+        ssd.condition = ssdDto.condition
+        return ssd
+    }
+
 
     @GetMapping
     fun list(): List<Ssd> {
-        return ssdService.List()
+        return ssdService.list()
     }
 
     @PostMapping
-    fun save(@RequestBody ssdDto: SsdDto): Ssd {
-        return this.ssdService.save(ssdDto)
+    fun save(@RequestBody ssdDto: SsdDto): ResponseEntity<HttpStatus> {
+        val entityConverted = convertDtoToEntity(ssdDto)
+        ssdService.save(entityConverted)
+        return ResponseEntity.ok().body(HttpStatus.CREATED)
     }
 
     @DeleteMapping("/{id}")

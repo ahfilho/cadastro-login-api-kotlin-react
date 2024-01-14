@@ -15,32 +15,13 @@ class SsdService(private val ssdRepository: SsdRepository) {
 //    @Autowired
 //    lateinit var ssdRepository: SsdRepository
 
-    private fun convertEntitySsd(ssdDto: SsdDto): Ssd {
 
-        val ssd = Ssd()
-        ssd.brand = ssdDto.brand
-        ssd.serialNumber = ssdDto.serialNumber
-        ssd.size = ssdDto.size
-//        ssd.purchasePrice = ssdDto.purchasePrice
-//        ssd.purchaseDate = ssdDto.purchaseDate
-//        ssd.saleValue = ssdDto.saleValue
-        ssd.arrivalDate = ssdDto.arrivalDate
-        ssd.currentDate = ssdDto.currentDate
-        ssd.saleDate = ssdDto.saleDate
-        ssd.condition = ssdDto.condition
+    fun save(ssd: Ssd): Ssd {
+        ssdRepository.save(ssd)
         return ssd
     }
 
-    fun save(ssdDto: SsdDto): Ssd {
-        val convertEntityToDto = convertEntitySsd(ssdDto)
-        convertEntityToDto.arrivalDate = LocalDate.now()
-        convertEntityToDto.currentDate = LocalDate.now()
-
-        ssdRepository.save(convertEntityToDto)
-        return convertEntityToDto
-    }
-
-    fun List(): MutableList<Ssd> {
+    fun list(): MutableList<Ssd> {
         return this.ssdRepository.findAll()
     }
 
