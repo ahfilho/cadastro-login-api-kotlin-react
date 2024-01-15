@@ -54,8 +54,8 @@ class SsdController(private val ssdService: SsdService) {
 
     @PostMapping
     fun save(@RequestBody ssdDto: SsdDto): ResponseEntity<HttpStatus> {
-        val entityConverted = convertDtoToEntity(ssdDto)
-        ssdService.save(entityConverted)
+        val ssd = convertDtoToEntity(ssdDto)
+        ssdService.save(ssd)
         return ResponseEntity.ok().body(HttpStatus.CREATED)
     }
 
