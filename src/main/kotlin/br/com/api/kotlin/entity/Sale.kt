@@ -28,7 +28,7 @@ class Sale {
 
     @NotNull
     @Column(name = "WEIGHT")
-    var weigth: String? = null
+    var weight: String? = null
 
     @NotNull
     @Column(name = "SALE_DATE")

@@ -41,7 +41,7 @@ class SaleController(
                 println("Nome: ${sale.clientName}")
             }
             println("Tipo de Cartão: ${sale.typeCard} ")
-            println("Peso: ${sale.weigth} kg")
+            println("Peso: ${sale.weight} kg")
             println("Data da Venda: ${sale.saleDate} ")
             println("Valor da Venda: R$${sale.saleValue}")
             println("Código da Venda:$codeFinal")
