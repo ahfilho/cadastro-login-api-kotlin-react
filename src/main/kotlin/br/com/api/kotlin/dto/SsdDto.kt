@@ -5,6 +5,7 @@ import java.math.BigDecimal
 import java.time.LocalDate
 
 data class SsdDto(
+
     var brand: String? = null,
     var serialNumber: String? = null,
     var size: Int? = null,
