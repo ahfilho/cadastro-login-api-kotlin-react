@@ -2,13 +2,22 @@ package br.com.api.kotlin.auth.service
 
 import br.com.api.kotlin.auth.entity.Authority
 import br.com.api.kotlin.auth.repository.UserRepository
+<<<<<<< HEAD
 import br.com.api.kotlin.entity.User
 import br.com.api.kotlin.enumer.Role
 import io.jsonwebtoken.Claims
+=======
+import br.com.api.kotlin.enumer.Role
+import br.com.api.kotlin.entity.User
+>>>>>>> 5ae51cb (H2 Liberado, authorities para o tipo de usuario. Config do banco h2, config de segurança.)
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import java.util.*
 import javax.transaction.Transactional
+<<<<<<< HEAD
+=======
+import kotlin.collections.ArrayList
+>>>>>>> 5ae51cb (H2 Liberado, authorities para o tipo de usuario. Config do banco h2, config de segurança.)
 
 
 @Service
@@ -49,7 +58,10 @@ class UserService(private val userRepository: UserRepository, val passwordEncode
         return authority
 
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5ae51cb (H2 Liberado, authorities para o tipo de usuario. Config do banco h2, config de segurança.)
 }
 
 

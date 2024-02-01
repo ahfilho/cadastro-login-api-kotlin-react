@@ -1,5 +1,6 @@
 package br.com.api.kotlin.auth.controller
 
+<<<<<<< HEAD
 import br.com.api.kotlin.auth.request.AuthenticationRequest
 import br.com.api.kotlin.auth.response.LoginResponse
 import br.com.api.kotlin.auth.token.JwtToken
@@ -14,10 +15,24 @@ import org.springframework.web.bind.annotation.*
 import java.security.NoSuchAlgorithmException
 import java.security.spec.InvalidKeySpecException
 import javax.servlet.http.HttpServletResponse
+=======
+import org.springframework.http.ResponseEntity
+import org.springframework.security.authentication.AuthenticationManager
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
+import org.springframework.web.bind.annotation.CrossOrigin
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RestController
+import javax.persistence.GeneratedValue
+
+>>>>>>> 5ae51cb (H2 Liberado, authorities para o tipo de usuario. Config do banco h2, config de segurança.)
 
 @RestController
 @RequestMapping("/login")
 @CrossOrigin
+<<<<<<< HEAD
 class LoginController {
 
     @Autowired
@@ -49,4 +64,9 @@ class LoginController {
 
 
     }
+=======
+class LoginController  {
+
+
+>>>>>>> 5ae51cb (H2 Liberado, authorities para o tipo de usuario. Config do banco h2, config de segurança.)
 }

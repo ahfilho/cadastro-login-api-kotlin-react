@@ -30,7 +30,11 @@ class SecurityConfig {
             .csrf().disable()
             .cors(Customizer.withDefaults())
             .authorizeHttpRequests()
+<<<<<<< HEAD
             .antMatchers("/new/user/**","/login").permitAll()
+=======
+            .antMatchers("/new/user/**").permitAll()
+>>>>>>> 5ae51cb (H2 Liberado, authorities para o tipo de usuario. Config do banco h2, config de segurança.)
             .antMatchers("/h2-console/**").permitAll()
             .anyRequest()
             .authenticated()

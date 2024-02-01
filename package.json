@@ -1,6 +1,10 @@
 {
   "dependencies": {
+<<<<<<< HEAD
     "create-react-app": "^5.0.1",
     "react-scripts": "^5.0.1"
+=======
+    "create-react-app": "^5.0.1"
+>>>>>>> 5ae51cb (H2 Liberado, authorities para o tipo de usuario. Config do banco h2, config de segurança.)
   }
 }
