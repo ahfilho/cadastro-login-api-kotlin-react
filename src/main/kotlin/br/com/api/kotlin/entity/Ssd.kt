@@ -4,7 +4,7 @@ import java.time.LocalDate
 import javax.persistence.*
 
 @Entity
-@Table(name = "hd_ssd")
+//@Table(name = "hd_ssd")
 class Ssd {
 
 

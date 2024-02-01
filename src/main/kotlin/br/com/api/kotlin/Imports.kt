@@ -6,5 +6,5 @@ import org.springframework.boot.runApplication
 class EstudarApp
 
 fun main(args: Array<String>) {
-    runApplication<br.com.api.kotlin.EstudarApp>(*args)
+    runApplication<EstudarApp>(*args)
 }

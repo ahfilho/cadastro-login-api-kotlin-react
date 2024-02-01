@@ -12,9 +12,6 @@ import javax.transaction.Transactional
 @Transactional
 class SsdService(private val ssdRepository: SsdRepository) {
 
-//    @Autowired
-//    lateinit var ssdRepository: SsdRepository
-
 
     fun save(ssd: Ssd): Ssd {
         ssdRepository.save(ssd)
