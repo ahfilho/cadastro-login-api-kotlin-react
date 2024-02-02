@@ -2,13 +2,13 @@ package br.com.api.kotlin.auth.service
 
 import br.com.api.kotlin.auth.entity.Authority
 import br.com.api.kotlin.auth.repository.UserRepository
-import br.com.api.kotlin.enumer.Role
 import br.com.api.kotlin.entity.User
+import br.com.api.kotlin.enumer.Role
+import io.jsonwebtoken.Claims
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import java.util.*
 import javax.transaction.Transactional
-import kotlin.collections.ArrayList
 
 
 @Service
@@ -49,6 +49,7 @@ class UserService(private val userRepository: UserRepository, val passwordEncode
         return authority
 
     }
+
 }
 
 
