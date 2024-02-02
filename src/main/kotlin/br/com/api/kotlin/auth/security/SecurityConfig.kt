@@ -30,7 +30,7 @@ class SecurityConfig {
             .csrf().disable()
             .cors(Customizer.withDefaults())
             .authorizeHttpRequests()
-            .antMatchers("/new/user/**").permitAll()
+            .antMatchers("/new/user/**","/login").permitAll()
             .antMatchers("/h2-console/**").permitAll()
             .anyRequest()
             .authenticated()
