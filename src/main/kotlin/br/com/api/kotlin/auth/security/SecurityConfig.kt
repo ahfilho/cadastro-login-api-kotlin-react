@@ -31,7 +31,7 @@ class SecurityConfig {
             .cors(Customizer.withDefaults())
             .authorizeHttpRequests()
             .antMatchers("/new/user/**").permitAll()
-            .antMatchers("/h2-console/**").permitAll()
+            .antMatchers("/h2-console/**", "/auth/login/login/").permitAll()
             .anyRequest()
             .authenticated()
             .and().sessionManagement()
