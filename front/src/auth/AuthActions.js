@@ -1,4 +1,5 @@
-import { AUTH_REQ, AUTH_SUCESS, AUTH_FAILURE } from '../redux/types';
+import { AUTH_REQ, AUTH_SUCCESS, AUTH_FAILURE } from '../redux/types';
+
 
 export const authenticate = () => {
     return {
@@ -6,13 +7,15 @@ export const authenticate = () => {
     }
 }
 
-export const authenticateSucess = (content) => {
+
+export const authSuccess = (content) => {
     localStorage.setItem('USER_KEY', content.token);
     return {
-        type: AUTH_SUCESS,
+        type: AUTH_SUCCESS,
         payload: content
     }
 }
+
 export const authFailure = (error) => {
     return {
         type: AUTH_FAILURE,
