@@ -1,7 +1,9 @@
 package br.com.api.kotlin.auth.response
 
-class LoginResponse(token: String) {
+class LoginResponse {
+     fun token(jwtToken: String) {
 
+     }
 
-    val token: String? = null
+     val token: String? = null
 }
