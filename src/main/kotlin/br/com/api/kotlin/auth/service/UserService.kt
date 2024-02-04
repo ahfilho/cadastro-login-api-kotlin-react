@@ -33,8 +33,6 @@ class UserService(private val userRepository: UserRepository, val passwordEncode
             user.authorities(authorityListMutable)
 
         }
-        var encryptedPassword = passwordEncoder.encode(user.userPassword)
-        user.userPassword = encryptedPassword
         userRepository.save(user)
 
         return user
