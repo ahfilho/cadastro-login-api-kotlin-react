@@ -30,7 +30,7 @@ class SecurityConfig {
             .csrf().disable()
             .cors(Customizer.withDefaults())
             .authorizeHttpRequests()
-            .antMatchers("/new/user/**").permitAll()
+            .antMatchers("/new/user","auth/login/login").permitAll()
             .antMatchers("/h2-console/**", "/auth/login/login/").permitAll()
             .anyRequest()
             .authenticated()
@@ -38,7 +38,7 @@ class SecurityConfig {
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and().formLogin().disable().httpBasic()
 
-        return http.csrf().disable().build()
+        return http.csrf().disable().cors().disable().build()
     }
 
     @Throws(Exception::class)
