@@ -15,7 +15,8 @@ import javax.validation.constraints.Size
 class User : UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-     val id: Long? = null
+     var id: Long? = null
+
 
     @Column(name = "USER_NAME", unique = true)
      var userName: @NotBlank(message = "O nome não pode estar em branco") @Size(
@@ -24,7 +25,7 @@ class User : UserDetails {
         message = "O nome deve ter entre 2 e 50 caracteres"
     ) String? = null
 
-     val email: @NotBlank(message = "O e-mail não pode estar em branco") @Email(message = "O e-mail deve ser válido") String? =
+     var email: @NotBlank(message = "O e-mail não pode estar em branco") @Email(message = "O e-mail deve ser válido") String? =
         null
 
     @Column(name = "USER_KEY")
@@ -45,7 +46,7 @@ class User : UserDetails {
     @Column(name = "LAST_NAME")
      var lastName: String? = null
 
-     val cpf: @NotBlank(message = "O CPF não pode estar em branco") @Pattern(
+     var cpf: @NotBlank(message = "O CPF não pode estar em branco") @Pattern(
         regexp = "\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}",
         message = "O CPF deve ter o formato 999.999.999-99"
     ) @Size(min = 14, max = 14, message = "O CPF deve conter 11 dígitos") String? = null

@@ -19,7 +19,7 @@ class UserService(private val userRepository: UserRepository, val passwordEncode
 
         val authorityListMutable = authorityList.toMutableList()
 
-        val lowerCaseProfile = user.profile.lowercase(Locale.getDefault())
+        val lowerCaseProfile = user.profile?.lowercase(Locale.getDefault())
         if ("admin".equals(lowerCaseProfile)) {
             user.profile = Role.ADMIN.role.lowercase(Locale.getDefault())
             authorityListMutable.add(createAuthority("ADMIN", "Admin role"))
@@ -30,7 +30,7 @@ class UserService(private val userRepository: UserRepository, val passwordEncode
             } else {
                 throw IllegalArgumentException("Perfil inválido." + user.profile)
             }
-            user.authorities(authorityListMutable)
+            user.authorities = authorityList
 
         }
         userRepository.save(user)
