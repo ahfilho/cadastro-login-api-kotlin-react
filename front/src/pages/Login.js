@@ -40,7 +40,7 @@ const Login = ({ loading, error, ...props }) => {
                         break;
                     default:
                         props.loginFailure('Algo saiu errado. Tente novamente.');
-                    }
+                }
             } else {
                 props.loginFailure('Algo saiu errado. Tente novamente.');
             }

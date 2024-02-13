@@ -7,18 +7,19 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.core.userdetails.UsernameNotFoundException
+import org.springframework.stereotype.Service
 
+@Service
 class UserDetailsServiceImpl : UserDetailsService {
+    @Autowired
+    private val userDetailsRepository: UserDetailsRepository? = null
 
     @Autowired
-    lateinit var useDetailsRepository: UserDetailsRepository
-
-    @Autowired
-    lateinit var userRepository: UserRepository
+    private val userRepository: UserRepository? = null
 
     @Throws(UsernameNotFoundException::class)
     override fun loadUserByUsername(username: String): UserDetails {
-        val user = userRepository!!.findByUserName(username)
+        val user: User = userRepository!!.findByUserName(username) as User?
             ?: throw UsernameNotFoundException("Nome de usuário não encontrado:$username")
 
         return user

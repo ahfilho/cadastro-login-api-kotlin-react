@@ -35,9 +35,6 @@ class UserController(private val userService: UserService) {
         val user: User? = modelMapper.map(userDto, User::class.java)
 
         if (user != null) {
-
-            var encryptedPassword = passwordEncoder.encode(user.userPassword)
-            user.userPassword = encryptedPassword
             userService.save(user)
         };
         return ResponseEntity.ok().body(HttpStatus.CREATED)

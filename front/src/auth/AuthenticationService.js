@@ -7,21 +7,23 @@ const getToken = () => {
 export const userLogin = (authRequest) => {
     return axios({
         method: 'POST',
-        url: `${process.env.hostUrl || 'http://localhost:8080'}/auth/login/login`,
+        url: `${process.env.hostUrl || 'http://localhost:8080'}/auth/login`,
+        data: authRequest
+
     });
 }
-export const fetchUserData = () =>{
+export const fetchUserData = () => {
     const token = localStorage.getItem('USER_KEY');
-    if(token){
+    if (token) {
         return axios({
             method: 'GET',
-            url: `${process.env.hostUrl|| 'https://localhost:8000'}/auth/login/login`,
-            headers:{
-                'Authorization': 'Bearer '+ token
+            url: `${process.env.hostUrl || 'https://localhost:8000'}/auth/login/todos`,
+            headers: {
+                'Authorization': 'Bearer ' + token
             }
         });
     } else {
-        window.location.href="/login";
+        window.location.href = "/login";
         return Promise.reject(new Error('Token não disponível.'));
     }
 }
