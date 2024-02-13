@@ -5,7 +5,7 @@ import { authenticate, authFailure, authSuccess } from '../auth/AuthActions';
 import { userLogin } from '../auth/AuthenticationService';
 import { Alert, Spinner } from 'react-bootstrap';
 import { Link } from "react-router-dom";
-// import NewUser from './NewUser';
+import NewUser from './NewUser';
 import { useNavigate } from 'react-router-dom';
 
 const Login = ({ loading, error, ...props }) => {
@@ -40,7 +40,7 @@ const Login = ({ loading, error, ...props }) => {
                         break;
                     default:
                         props.loginFailure('Algo saiu errado. Tente novamente.');
-                    }
+                }
             } else {
                 props.loginFailure('Algo saiu errado. Tente novamente.');
             }
@@ -58,7 +58,7 @@ const Login = ({ loading, error, ...props }) => {
     return (
         <div className="login-page">
             <div className="login-container">
-                {/* <NewUser /> */}
+                <NewUser />
             </div>
             <section className="h-100">
                 <div className="container h-100">

@@ -7,55 +7,58 @@ import java.util.*
 import javax.persistence.*
 import javax.validation.constraints.Email
 import javax.validation.constraints.NotBlank
-import javax.validation.constraints.NotEmpty
 import javax.validation.constraints.Pattern
 import javax.validation.constraints.Size
 
 @Entity
 @Table(name = "AUTH_USER_DETAILS")
-data class User(
+class User : UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null,
+     val id: Long? = null
 
-    @NotBlank(message = "O nome não pode estar em branco")
-    @Size(min = 2, max = 30, message = "O nome deve ter entre 2 e 50 caracteres")
     @Column(name = "USER_NAME", unique = true)
-    var userName: String? = null,
+     var userName: @NotBlank(message = "O nome não pode estar em branco") @Size(
+        min = 2,
+        max = 30,
+        message = "O nome deve ter entre 2 e 50 caracteres"
+    ) String? = null
 
-    @NotBlank(message = "O e-mail não pode estar em branco")
-    @Email(message = "O e-mail deve ser válido")
-    var email: String? = null,
+     val email: @NotBlank(message = "O e-mail não pode estar em branco") @Email(message = "O e-mail deve ser válido") String? =
+        null
 
-    @NotEmpty(message = "A senha não pode estar em branco")
-    @Size(min = 6, message = "A senha deve ter pelo menos 6 caracteres")
     @Column(name = "USER_KEY")
-    var userPassword: String? = null,
+     var userPassword: @NotBlank(message = "A senha não pode estar em branco") @Size(
+        min = 6,
+        message = "A senha deve ter pelo menos 6 caracteres"
+    ) String? = null
 
     @Column(name = "CREATED_ON")
-    var createdAt: Date? = null,
+     var createdAt: Date? = null
 
     @Column(name = "UPDATED_ON")
-    var updatedAt: Date? = null,
+     var updatedAt: Date? = null
 
     @Column(name = "FIRST_NAME")
-    var firstName: String? = null,
+     var firstName: String? = null
 
     @Column(name = "LAST_NAME")
-    var lastName: String? = null,
+     var lastName: String? = null
 
-    @NotBlank(message = "O CPF não pode estar em branco")
-    @Pattern(regexp = "\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}", message = "O CPF deve ter o formato 999.999.999-99")
-    @Size(min = 14, max = 14, message = "O CPF deve conter 11 dígitos")
-    var cpf: String,
+     val cpf: @NotBlank(message = "O CPF não pode estar em branco") @Pattern(
+        regexp = "\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}",
+        message = "O CPF deve ter o formato 999.999.999-99"
+    ) @Size(min = 14, max = 14, message = "O CPF deve conter 11 dígitos") String? = null
 
-    @NotBlank(message = "O perfil não pode estar em branco")
-    @Pattern(regexp = "usuario|admin", message = "O perfil deve ser usuario ou admin")
     @Column(name = "USER_TYPE")
-    var profile: String,
+     var profile: @NotBlank(message = "O perfil não pode estar em branco") @Pattern(
+        regexp = "usuario|admin",
+        message = "O perfil deve ser usuario ou admin"
+    ) String? = null
 
     @Column(name = "ENABLED")
-    var enabled: Boolean = true,
+     var enabled = true
+
 
     @ManyToMany(cascade = [CascadeType.ALL], fetch = FetchType.EAGER)
     @JoinTable(
@@ -63,40 +66,33 @@ data class User(
         joinColumns = [JoinColumn(referencedColumnName = "id")],
         inverseJoinColumns = [JoinColumn(referencedColumnName = "id")]
     )
-    val authorities: List<Authority>,
-) : UserDetails {
+    var authorities: List<Authority?>? = null
 
-    fun authorities(authorityListMutable: MutableList<Authority>): List<Authority> {
+    override fun getAuthorities(): Collection<GrantedAuthority?>? {
         return authorities
     }
 
     override fun getUsername(): String? {
-        return userName
-    }
-
-    override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
-        TODO("Not yet implemented")
+        return this.userName
     }
 
     override fun getPassword(): String? {
-        return userPassword
+        return this.userPassword
     }
 
     override fun isAccountNonExpired(): Boolean {
-        return enabled
+        return this.enabled
     }
 
     override fun isAccountNonLocked(): Boolean {
-        return enabled
+        return this.enabled
     }
 
     override fun isCredentialsNonExpired(): Boolean {
-        return enabled
+        return this.enabled
     }
 
     override fun isEnabled(): Boolean {
-        return enabled
+        return this.enabled
     }
-
-
 }
