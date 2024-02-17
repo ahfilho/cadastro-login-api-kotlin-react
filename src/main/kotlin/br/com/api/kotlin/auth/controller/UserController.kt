@@ -1,24 +1,16 @@
 package br.com.api.kotlin.auth.controller
 
 import br.com.api.kotlin.auth.dto.UserDto
+import br.com.api.kotlin.auth.service.UserDetailsServiceImpl
 import br.com.api.kotlin.auth.service.UserService
 import br.com.api.kotlin.entity.User
 import org.modelmapper.ModelMapper
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
-import org.springframework.security.core.Authentication
-import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.crypto.password.PasswordEncoder
-import org.springframework.web.bind.annotation.CrossOrigin
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
-import java.security.NoSuchAlgorithmException
-import java.security.spec.InvalidKeySpecException
-import javax.servlet.http.HttpServletResponse
+import org.springframework.web.bind.annotation.*
+import java.security.Principal
 
 @RestController
 @RequestMapping("/new/user")
@@ -43,4 +35,23 @@ class UserController(private val userService: UserService) {
         };
         return ResponseEntity.ok().body(HttpStatus.CREATED)
     }
+
+    @GetMapping("/all")
+    fun listAllUsers(principal: Principal?): ResponseEntity<List<User>> {
+        if (principal == null) {
+            val allUsers = userService.listAll(null)
+            return ResponseEntity.ok(allUsers)
+        }
+        val userDetailsService: UserDetailsServiceImpl? = null
+        val authenticatedUser = userDetailsService!!.loadUserByUsername(principal.name) as User
+
+        if (userService.isAdmin(authenticatedUser)) {
+            val allUsers = userService.listAll(authenticatedUser)
+            return ResponseEntity.ok(allUsers)
+        } else {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build()
+        }
+    }
+
+
 }

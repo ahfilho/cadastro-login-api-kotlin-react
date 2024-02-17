@@ -76,7 +76,7 @@ class AuthenticationController() {
         userInfo.lastName = userObj.lastName
         userInfo.password = userObj.password
         userInfo.profile = userObj.profile
-        userInfo.roles = userObj.authorities
+        userInfo.roles = userObj.authorities!!.toTypedArray()
 
         return ResponseEntity.ok<Any>(userInfo)
     }
