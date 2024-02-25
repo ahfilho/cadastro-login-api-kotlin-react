@@ -46,6 +46,7 @@ class SecurityConfig<UserDetailsServiceImpml> {
         authProvider.setPasswordEncoder(passwordEncoder())
         return authProvider
     }
+
     // Modo simplificado, ja que o WEBCONFIGURERADAPTER está depreciado.
     @Bean
     fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
@@ -53,8 +54,15 @@ class SecurityConfig<UserDetailsServiceImpml> {
             .csrf().disable()
             .cors().disable()
             .authorizeHttpRequests()
-            .antMatchers("/new/user/**","/auth/login","/auth/userinfo","/localhost:3000/**","/localhost:8080/**","/localhost:9090/**").permitAll()
-            .antMatchers("/h2-console/**","/localhost:8080/auth/login").permitAll()
+            .antMatchers(
+                "/new/user/**",
+                "/auth/login",
+                "/auth/userinfo",
+                "/localhost:3000/**",
+                "/localhost:8080/**",
+                "/localhost:9090/**"
+            ).permitAll()
+            .antMatchers("/h2-console/**", "/localhost:8080/auth/login").permitAll()
             .anyRequest()
             .authenticated()
             .and().sessionManagement()
@@ -68,7 +76,8 @@ class SecurityConfig<UserDetailsServiceImpml> {
     @Bean
     fun authenticationManager(
         userDetailsService: UserDetailsService,
-        passwordEncoder: PasswordEncoder): AuthenticationManager {
+        passwordEncoder: PasswordEncoder,
+    ): AuthenticationManager {
         val authenticationProvider = DaoAuthenticationProvider()
         authenticationProvider.setUserDetailsService(userDetailsService)
         authenticationProvider.setPasswordEncoder(passwordEncoder)
@@ -79,7 +88,7 @@ class SecurityConfig<UserDetailsServiceImpml> {
 
     @Throws(Exception::class)
     fun configure(web: WebSecurity) {
-        // Ignorar o caminho do console do H2 para que ele seja acessível sem autenticação
+        // Ignora o caminho do console do H2 para que ele seja acessível sem autenticação
         web.ignoring().antMatchers(
             "/h2-console/**", "/swagger-ui/**, /v3/api-docs/**", "/**.html",
             "/v2/api-docs",

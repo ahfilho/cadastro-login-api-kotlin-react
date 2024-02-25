@@ -53,5 +53,10 @@ class UserController(private val userService: UserService) {
         }
     }
 
+    @Throws
+    fun userDelete(@PathVariable id: Long): HttpStatus {
+        this.userService.deleteUserById(id)
+        return HttpStatus.OK
+    }
 
 }
