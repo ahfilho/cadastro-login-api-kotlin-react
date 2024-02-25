@@ -4,6 +4,7 @@ import br.com.api.kotlin.auth.entity.Authority
 import br.com.api.kotlin.auth.repository.UserRepository
 import br.com.api.kotlin.entity.User
 import br.com.api.kotlin.enumer.Role
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import java.util.*
@@ -11,7 +12,11 @@ import javax.transaction.Transactional
 
 
 @Service
-class UserService(private val userRepository: UserRepository, val passwordEncoder: PasswordEncoder) {
+class UserService(val passwordEncoder: PasswordEncoder) {
+
+    @Autowired
+    lateinit var userRepository: UserRepository
+
     @Transactional
     fun save(user: User): User {
         val authorityList: List<Authority> = ArrayList()
@@ -47,16 +52,6 @@ class UserService(private val userRepository: UserRepository, val passwordEncode
 
     }
 
-    //    @Override
-    //    public UserDetails loadUserByUsername(String nome) throws UsernameNotFoundException {
-    //        User user = userRepository.findByNome(nome);
-    //
-    //        if (user != null) {
-    //            return (UserDetails) user;
-    //        }
-    //        throw new UsernameNotFoundException("Usuário não encontrado: " + nome);
-    //
-    //    }
     fun listAll(authenticatedUser: User?): List<User> {
         return if (authenticatedUser == null || isAdmin(authenticatedUser)) {
             userRepository.findAll()
@@ -69,6 +64,21 @@ class UserService(private val userRepository: UserRepository, val passwordEncode
         return "admin".equals(user.profile, ignoreCase = true)
     }
 
+    fun deleteUserById(id: Long) {
+        val optionalUser: Optional<User> = userRepository.findById(id)
+        if (optionalUser.isPresent) {
+            val user: User = optionalUser.get()
+            if ("admin".equals(user.profile, ignoreCase = true)) {
+                userRepository.delete(user)
+            } else {
+                throw Exception("Usuário não autorizado para excluir.")
+            }
+        } else {
+            throw Exception("Usuário não autorizado para excluir.");
+
+        }
+    }
+//TODO ------------------------------------- TERMINAR O DELETE
 
 }
 
