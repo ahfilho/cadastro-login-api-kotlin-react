@@ -78,7 +78,6 @@ class UserService(val passwordEncoder: PasswordEncoder) {
 
         }
     }
-//TODO ------------------------------------- TERMINAR O DELETE
 
 }
 
