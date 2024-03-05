@@ -67,7 +67,6 @@ class ListUser extends Component {
 
   render() {
     const { showMessage, message } = this.state;
-
     return (
       <div className="tabela-container">
         {showMessage && <div className="message">{message}</div>}
