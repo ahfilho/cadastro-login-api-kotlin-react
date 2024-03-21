@@ -70,13 +70,16 @@ class AuthenticationController() {
     @GetMapping("/auth/userinfo")
     fun getUserInfo(user: Principal): ResponseEntity<*> {
         val userObj = userDetailsServiceImpl?.loadUserByUsername(user.name) as User
+        if (user == null!!) {
+            println("USER NULL")
+        }
+            val userInfo: UserInfo = UserInfo()
+            userInfo.firstName = userObj.firstName
+            userInfo.lastName = userObj.lastName
+            userInfo.password = userObj.password
+            userInfo.profile = userObj.profile
+            userInfo.roles = userObj.authorities!!.toTypedArray()
 
-        val userInfo: UserInfo = UserInfo()
-        userInfo.firstName = userObj.firstName
-        userInfo.lastName = userObj.lastName
-        userInfo.password = userObj.password
-        userInfo.profile = userObj.profile
-        userInfo.roles = userObj.authorities!!.toTypedArray()
 
         return ResponseEntity.ok<Any>(userInfo)
     }

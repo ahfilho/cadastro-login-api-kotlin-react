@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 
 
-const Hola = () => {
+export const Hola = (props) => {
 
 
     const dispatch = useDispatch();
@@ -68,7 +68,7 @@ const Hola = () => {
 
 
 
-            /</Container>
+            </Container>
     );
 }
 export default Hola;

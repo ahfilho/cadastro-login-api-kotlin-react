@@ -36,7 +36,7 @@ const Login = ({ loading, error, ...props }) => {
                 switch (err.response.status) {
                     case 401:
                         console.log("401 status");
-                        props.loginFailure("A autenticação falhou. Reveja seus dados.");
+                        props.loginFailure("A autenticação fa lhou. Reveja seus dados.");
                         break;
                     default:
                         props.loginFailure('Algo saiu errado. Tente novamente.');

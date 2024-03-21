@@ -21,7 +21,7 @@ class ListUser extends Component {
     }
 
     // Verificar se o usuário autenticado tem perfil de administrador
-    if (userPerfil !== 'ADMIN') {
+    if (userPerfil !== 'admin') {
       this.showMessage('Você não tem permissão para excluir usuários.');
       return;
     }
@@ -61,7 +61,14 @@ class ListUser extends Component {
       const usuarios = res.data;
       this.setState({ usuarios });
     });
-
+      axios.get("http://localhost:8080/auth/auth/userinfo").then((res)=>{
+            const perfil = res.data;
+            if(perfil===""){
+              this.setState({perfil:"admin"});
+              this.showMessage('Erro ao excluir usuário. Por favor, tente novamente mais tarde.');
+    
+            }
+      })
     this.setState({ userPerfil: 'ADMIN' }); // Aqui você deve definir o perfil do usuário logado vindo do backend
   }
 
@@ -69,7 +76,7 @@ class ListUser extends Component {
     const { showMessage, message } = this.state;
     return (
       <div className="tabela-container">
-        {showMessage && <div className="message">{message}</div>}
+        {/* {showMessage && <div className="message">{message}</div>} */}
         <div className="tabela">
           <br></br>
           <div className="title">Usuários</div>
@@ -111,10 +118,16 @@ class ListUser extends Component {
                   )}
                 </td>
               </tr>
+
             ))}
+          
           </tbody>
         </table>
+        {showMessage}
+            {showMessage &&
+              <div className="message">{message}</div>}
       </div>
+      
     );
   }
 }
