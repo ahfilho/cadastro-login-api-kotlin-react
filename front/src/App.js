@@ -9,7 +9,7 @@ function App() {
 
       <Route path="/" exact element={<Login />} />
       <Route path="/list" exact element={<Listar />} />
-      <Route path="/hola" exact component={<Hola />} />
+      <Route path="/hola" exact element={<Hola />} />
 
 
     </Routes>

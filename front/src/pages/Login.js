@@ -27,6 +27,7 @@ const Login = ({ loading, error, ...props }) => {
 
             if (response.status === 200) {
                 props.setUser(response.data);
+                console.log("TESTE AQIO")
                 navigate('/hola');
             } else {
                 props.loginFailure('Algo saiu errado. Tente novamente.');
@@ -36,7 +37,7 @@ const Login = ({ loading, error, ...props }) => {
                 switch (err.response.status) {
                     case 401:
                         console.log("401 status");
-                        props.loginFailure("A autenticação fa lhou. Reveja seus dados.");
+                        props.loginFailure("A autenticação falhou. Reveja seus dados.");
                         break;
                     default:
                         props.loginFailure('Algo saiu errado. Tente novamente.');
@@ -91,7 +92,7 @@ const Login = ({ loading, error, ...props }) => {
 
                                             </label>
                                             <input
-                                                id="password"
+                                                id="passwordInput"
                                                 type="password"
                                                 className="form-control"
                                                 minLength={6}

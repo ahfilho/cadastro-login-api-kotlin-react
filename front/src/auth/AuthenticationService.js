@@ -12,18 +12,22 @@ export const userLogin = (authRequest) => {
 
     });
 }
+
 export const fetchUserData = () => {
     const token = localStorage.getItem('USER_KEY');
+
+    // Verifica se o token está presente
     if (token) {
         return axios({
             method: 'GET',
-            url: `${process.env.hostUrl || 'http://localhost:8000'}/auth/login/todos`,
+            url: `${process.env.hostUrl || 'http://localhost:8080'}/auth/auth/userinfo`,
             headers: {
-                'Authorization': 'Bearer ' + token
+                'Authorization': 'Bearer ' + getToken()
             }
         });
     } else {
-        window.location.href = "/login";
-        return Promise.reject(new Error('Token não disponível.'));
+        window.location.href = '/login';
+
+        return Promise.reject(new Error('Token não disponível'));
     }
 }

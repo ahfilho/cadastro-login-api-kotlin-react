@@ -7,6 +7,7 @@ import br.com.api.kotlin.auth.service.UserDetailsServiceImpl
 import br.com.api.kotlin.auth.token.JwtToken
 import br.com.api.kotlin.entity.User
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
@@ -59,8 +60,8 @@ class AuthenticationController() {
         val jwtToken: String = jwtToken.generateToken(user.username)
 
         val response: LoginResponse = LoginResponse()
-        response.token(jwtToken)
-
+        response.token = jwtToken
+        println(jwtToken)
 
         return ResponseEntity.ok<Any>(response)
 
@@ -69,17 +70,14 @@ class AuthenticationController() {
 
     @GetMapping("/auth/userinfo")
     fun getUserInfo(user: Principal): ResponseEntity<*> {
-        val userObj = userDetailsServiceImpl?.loadUserByUsername(user.name) as User
-        if (user == null!!) {
-            println("USER NULL")
-        }
-            val userInfo: UserInfo = UserInfo()
+        val userObj = this.userDetailsServiceImpl!!.loadUserByUsername(user.name) as User
+
+        val userInfo: UserInfo = UserInfo()
             userInfo.firstName = userObj.firstName
             userInfo.lastName = userObj.lastName
             userInfo.password = userObj.password
             userInfo.profile = userObj.profile
             userInfo.roles = userObj.authorities!!.toTypedArray()
-
 
         return ResponseEntity.ok<Any>(userInfo)
     }

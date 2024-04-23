@@ -11,11 +11,13 @@
 	<groupId>com.example</groupId>
 	<artifactId>kotlin</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Estudar</name>
-	<description>praticar kt</description>
+	<name>Api kotlin e ReactJS</name>
+	<description>Cadastro, Login, reset de senha</description>
 	<properties>
 		<java.version>11</java.version>
 		<kotlin.version>1.6.21</kotlin.version>
+		<compiler.autoRun>false</compiler.autoRun>
+
 	</properties>
 	<dependencies>
 		<dependency>

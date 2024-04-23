@@ -61,9 +61,10 @@ class SecurityConfig<UserDetailsServiceImpml> {
                 "/localhost:3000/**",
                 "/localhost:8080/**",
                 "/localhost:9090/**",
+                "/auth/auth/userinfo",
+                "/h2-console/**",
+                "/auth/login"
             ).permitAll()
-            .antMatchers("/auth/auth/userinfo").permitAll()
-            .antMatchers("/h2-console/**", "/localhost:8080/auth/login").permitAll()
             .anyRequest()
             .authenticated()
             .and().sessionManagement()
