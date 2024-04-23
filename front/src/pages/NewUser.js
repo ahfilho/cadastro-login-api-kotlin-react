@@ -174,13 +174,7 @@ const NewUser = () => {
                         type="submit"
                         value="Cadastrar"
                       ></input>
-                      <div className="new-user-form">
-                        <button type="submit" className="btn btn-primary">
-                          <Link to="/list" className="animated-button9" style={{ color: 'white', textDecoration: 'none' }}>
-                            Listar todos
-                          </Link>
-                        </button>
-                      </div>
+                  
 
                     </div>
 

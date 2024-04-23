@@ -1,4 +1,6 @@
-import React, { useDebugValue, useState } from 'react';
+// import React, { useDebugValue, useState } from 'react';
+import React, { useState, useEffect } from 'react';
+
 import { connect, useDispatch } from 'react-redux';
 import { authenticate, authFailure, authSuccess } from '../auth/AuthActions';
 // import './login.css';
@@ -25,6 +27,7 @@ export const Hola = (props) => {
             localStorage.clear();
             navigate("/");
         })
+        console.log("passou aqui")
     }, [])
     const logOut = () => {
         localStorage.clear();
@@ -34,7 +37,7 @@ export const Hola = (props) => {
         <Container>
             <div className='teste'>asdas
                 <div className='tittle'>
-                    <h3>Olá,{data && `${data.fistName} ${data.lastName}. Perfil:${data.roles && data.roles.find(role => role.roleCode === "ADMIN") ? 'ADMINISTRADOR' : 'Usuario'}`}</h3>
+                    <h3>Olá,{data && `${data.firstName} ${data.lastName}. Perfil:${data.roles && data.roles.find(role => role.roleCode === "ADMIN") ? 'ADMINISTRADOR' : 'Usuario'}`}</h3>
                 </div>
                 <div className='button-container'>
                     <button type="button" className='"btn btn-primary'>
@@ -43,7 +46,7 @@ export const Hola = (props) => {
                         </a>
                     </button>
                     <div className="t2">
-                        <button type="submit" className="btn btn-primary">
+                        <button type="button" className="btn btn-primary">
                             <Link to="/list" className="animated-button9" style={{ color: 'white', textDecoration: 'none' }}>
                                 Listar todos
                             </Link>
