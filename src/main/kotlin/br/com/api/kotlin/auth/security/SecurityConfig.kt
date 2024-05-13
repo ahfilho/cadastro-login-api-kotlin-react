@@ -1,10 +1,12 @@
 package br.com.api.kotlin.auth.security
 
 import br.com.api.kotlin.auth.service.UserDetailsServiceImpl
+import br.com.api.kotlin.auth.token.JwtAuthenticationFilter
 import br.com.api.kotlin.auth.token.JwtToken
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.http.HttpMethod
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.ProviderManager
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider
@@ -14,11 +16,12 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer
 import org.springframework.security.config.http.SessionCreationPolicy
-import org.springframework.security.core.userdetails.User
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
+import org.springframework.security.web.AuthenticationEntryPoint
 import org.springframework.security.web.SecurityFilterChain
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher
 import org.springframework.web.cors.CorsConfiguration
 import org.springframework.web.cors.CorsConfigurationSource
@@ -34,46 +37,17 @@ class SecurityConfig<UserDetailsServiceImpml> {
     @Autowired
     private val jwtToken: JwtToken? = null
 
-    @Throws(Exception::class)
-    fun configure(auth: AuthenticationManagerBuilder) {
-        auth.userDetailsService<UserDetailsService>(userDetailsServiceImpl).passwordEncoder(passwordEncoder())
-    }
+    @Autowired
+    private val authenticationEntryPoint: AuthenticationEntryPoint? = null
 
     @Bean
-    fun authenticationProvider(): DaoAuthenticationProvider {
-        val authProvider = DaoAuthenticationProvider()
-        authProvider.setUserDetailsService(userDetailsServiceImpl)
-        authProvider.setPasswordEncoder(passwordEncoder())
-        return authProvider
+    fun authenticationManager(
+        passEncoder: PasswordEncoder,
+    ): AuthenticationManager {
+        val authenticationProvider = DaoAuthenticationProvider()
+        authenticationProvider.setPasswordEncoder(passEncoder)
+        return ProviderManager(authenticationProvider)
     }
-
-    // Modo simplificado, ja que o WEBCONFIGURERADAPTER está depreciado.
-    @Bean
-    fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
-        http
-            .csrf().disable()
-            .cors().disable()
-            .authorizeHttpRequests()
-            .antMatchers(
-                "/new/user/**",
-                "/auth/login",
-                "/auth/userinfo",
-                "/localhost:3000/**",
-                "/localhost:8080/**",
-                "/localhost:9090/**",
-                "/auth/auth/userinfo",
-                "/h2-console/**",
-                "/auth/login"
-            ).permitAll()
-            .anyRequest()
-            .authenticated()
-            .and().sessionManagement()
-            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-            .and().formLogin().disable().httpBasic()
-
-        return http.csrf().disable().cors().disable().headers().disable().build()
-    }
-
 
     @Bean
     fun authenticationManager(
@@ -85,6 +59,59 @@ class SecurityConfig<UserDetailsServiceImpml> {
         authenticationProvider.setPasswordEncoder(passwordEncoder)
 
         return ProviderManager(authenticationProvider)
+    }
+
+
+    @Bean
+    fun authenticationProvider(): DaoAuthenticationProvider {
+        val authProvider = DaoAuthenticationProvider()
+        authProvider.setUserDetailsService(userDetailsServiceImpl)
+        authProvider.setPasswordEncoder(passwordEncoder())
+        return authProvider
+    }
+
+    // Modo simplificado, ja que o WEBCONFIGURERADAPTER está depreciado.
+    @Bean
+    fun securityFilterChain(
+        http: HttpSecurity,
+        jwtToken: JwtToken,
+        userDetailsServiceImpl: UserDetailsServiceImpl,
+    ): SecurityFilterChain {
+        http
+            .csrf().disable()
+            .cors().disable()
+            .sessionManagement()
+            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .and()
+            .exceptionHandling()
+            .authenticationEntryPoint(authenticationEntryPoint)
+            .and()
+            .authorizeHttpRequests()
+            .antMatchers(
+
+                "/localhost:3000/**",
+                "/localhost:8080/**",
+                "/h2-console/**",
+            ).permitAll()
+            .antMatchers(
+                "/new/user",
+                "/auth/login",
+                "/auth/userinfo",
+                "/localhost:3000/**",
+                "/localhost:8080/**",
+                "/auth/auth/userinfo",
+                "/h2-console/**",
+            ).permitAll()
+            .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+            .anyRequest().authenticated()
+            .and()
+//            .addFilterBefore(
+//                JwtAuthenticationFilter(userDetailsServiceImpl, jwtToken),
+//                UsernamePasswordAuthenticationFilter::class.java
+//            )
+            .formLogin().disable().httpBasic()
+
+        return http.build()
     }
 
 
@@ -101,13 +128,10 @@ class SecurityConfig<UserDetailsServiceImpml> {
         )
     }
 
-    @Bean
-    fun authenticationManager(
-        passEncoder: PasswordEncoder,
-    ): AuthenticationManager {
-        val authenticationProvider = DaoAuthenticationProvider()
-        authenticationProvider.setPasswordEncoder(passEncoder)
-        return ProviderManager(authenticationProvider)
+
+    @Throws(Exception::class)
+    fun configure(auth: AuthenticationManagerBuilder) {
+        auth.userDetailsService<UserDetailsService>(userDetailsServiceImpl).passwordEncoder(passwordEncoder())
     }
 
     @Bean

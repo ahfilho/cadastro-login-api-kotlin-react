@@ -83,7 +83,7 @@ const NewUser = () => {
                         id="firstName"
                         value={firstName}
                         className="form-control"
-                        placeholder="Primeiro nome"
+                        placeholder="Nome"
                         onChange={(e) => setFirstName(e.target.value)}
                       />
                     </div>   <div className="form-group">

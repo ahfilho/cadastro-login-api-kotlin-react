@@ -3,8 +3,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class EstudarApp
+class Imports
 
 fun main(args: Array<String>) {
-    runApplication<EstudarApp>(*args)
+    runApplication<Imports>(*args)
 }

@@ -7,16 +7,17 @@ import br.com.api.kotlin.auth.service.UserDetailsServiceImpl
 import br.com.api.kotlin.auth.token.JwtToken
 import br.com.api.kotlin.entity.User
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
-import org.springframework.security.core.Authentication
 import org.springframework.security.core.context.SecurityContextHolder
+import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.web.bind.annotation.*
 import java.security.InvalidKeyException
+import java.security.NoSuchAlgorithmException
 import java.security.Principal
+import java.security.spec.InvalidKeySpecException
 import javax.servlet.http.HttpServletResponse
 
 
@@ -29,16 +30,20 @@ class AuthenticationController() {
 //    lateinit var authenticationManager: AuthenticationManager
 
     @Autowired
-    lateinit var jwtToken: JwtToken
+    private lateinit var jwtToken: JwtToken
 
     @Autowired
     lateinit var passwordEncoder: PasswordEncoder
 
     @Autowired
-    private val userDetailsServiceImpl: UserDetailsServiceImpl? = null
+    private lateinit var userDetailsServiceImpl: UserDetailsServiceImpl
 
     @Autowired
     private val authenticationManager: AuthenticationManager? = null
+
+    @Autowired
+    private val userDetailsService: UserDetailsService? = null
+
 
     @PostMapping("/login")
     @Throws(InvalidKeyException::class, NoSuchElementException::class)
@@ -53,33 +58,28 @@ class AuthenticationController() {
             )
         )
         println(authentication)
-
         SecurityContextHolder.getContext().authentication = authentication
-
         val user = authentication.principal as User
         val jwtToken: String = jwtToken.generateToken(user.username)
-
-        val response: LoginResponse = LoginResponse()
+        val response = LoginResponse()
         response.token = jwtToken
         println(jwtToken)
-
         return ResponseEntity.ok<Any>(response)
 
 
     }
 
-    @GetMapping("/auth/userinfo")
+    @GetMapping("/userinfo")
     fun getUserInfo(user: Principal): ResponseEntity<*> {
-        val userObj = this.userDetailsServiceImpl!!.loadUserByUsername(user.name) as User
+        val userObj = userDetailsServiceImpl.loadUserByUsername(user.name) as User
 
-        val userInfo: UserInfo = UserInfo()
-            userInfo.firstName = userObj.firstName
-            userInfo.lastName = userObj.lastName
-            userInfo.password = userObj.password
-            userInfo.profile = userObj.profile
-            userInfo.roles = userObj.authorities!!.toTypedArray()
-
-        return ResponseEntity.ok<Any>(userInfo)
+        val userInfo = UserInfo()
+        userInfo.firstName = userObj.firstName
+        userInfo.lastName = userObj.lastName
+        userInfo.profile = userObj.profile
+        userInfo.roles = userObj.authorities!!.toTypedArray()
+        println(user.name)
+        return ResponseEntity.ok(userInfo)
     }
 
 }

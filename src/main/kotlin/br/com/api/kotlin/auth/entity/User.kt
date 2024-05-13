@@ -15,50 +15,49 @@ import javax.validation.constraints.Size
 class User : UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-     var id: Long? = null
-
+    var id: Long? = null
 
     @Column(name = "USER_NAME", unique = true)
-     var userName: @NotBlank(message = "O nome não pode estar em branco") @Size(
+    var userName: @NotBlank(message = "O nome não pode estar em branco") @Size(
         min = 2,
         max = 30,
         message = "O nome deve ter entre 2 e 50 caracteres"
     ) String? = null
 
-     var email: @NotBlank(message = "O e-mail não pode estar em branco") @Email(message = "O e-mail deve ser válido") String? =
+    var email: @NotBlank(message = "O e-mail não pode estar em branco") @Email(message = "O e-mail deve ser válido") String? =
         null
 
     @Column(name = "USER_KEY")
-     var userPassword: @NotBlank(message = "A senha não pode estar em branco") @Size(
+    var userPassword: @NotBlank(message = "A senha não pode estar em branco") @Size(
         min = 6,
         message = "A senha deve ter pelo menos 6 caracteres"
     ) String? = null
 
     @Column(name = "CREATED_ON")
-     var createdAt: Date? = null
+    var createdAt: Date? = null
 
     @Column(name = "UPDATED_ON")
-     var updatedAt: Date? = null
+    var updatedAt: Date? = null
 
     @Column(name = "FIRST_NAME")
-     var firstName: String? = null
+    var firstName: String? = null
 
     @Column(name = "LAST_NAME")
-     var lastName: String? = null
+    var lastName: String? = null
 
-     var cpf: @NotBlank(message = "O CPF não pode estar em branco") @Pattern(
+    var cpf: @NotBlank(message = "O CPF não pode estar em branco") @Pattern(
         regexp = "\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}",
         message = "O CPF deve ter o formato 999.999.999-99"
     ) @Size(min = 14, max = 14, message = "O CPF deve conter 11 dígitos") String? = null
 
     @Column(name = "USER_TYPE")
-     var profile: @NotBlank(message = "O perfil não pode estar em branco") @Pattern(
+    var profile: @NotBlank(message = "O perfil não pode estar em branco") @Pattern(
         regexp = "usuario|admin",
         message = "O perfil deve ser usuario ou admin"
     ) String? = null
 
     @Column(name = "ENABLED")
-     var enabled = true
+    var enabled = true
 
 
     @ManyToMany(cascade = [CascadeType.ALL], fetch = FetchType.EAGER)

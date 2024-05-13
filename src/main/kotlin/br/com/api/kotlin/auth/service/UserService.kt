@@ -19,21 +19,21 @@ class UserService(val passwordEncoder: PasswordEncoder) {
 
     @Transactional
     fun save(user: User): User {
-        val authorityList: List<Authority> = ArrayList()
-
-        val authorityListMutable = authorityList.toMutableList()
+        val authorityList: MutableList<Authority> = ArrayList()
 
         val lowerCaseProfile = user.profile?.lowercase(Locale.getDefault())
-        if ("admin".equals(lowerCaseProfile)) {
+
+        if (lowerCaseProfile == "admin") {
             user.profile = Role.ADMIN.role.lowercase(Locale.getDefault())
-            authorityListMutable.add(createAuthority("ADMIN", "Admin role"))
+            authorityList.add(createAuthority("ADMIN", "Admin role"))
         } else {
-            if ("usuario".equals(lowerCaseProfile)) {
+            if (lowerCaseProfile == "usuario") {
                 user.profile = Role.USER.role.lowercase(Locale.getDefault())
-                authorityListMutable.add(createAuthority("USER", "User role"))
+                authorityList.add(createAuthority("USER", "User role"))
             } else {
                 throw IllegalArgumentException("Perfil inválido." + user.profile)
             }
+            user.enabled = true
             user.authorities = authorityList
 
         }

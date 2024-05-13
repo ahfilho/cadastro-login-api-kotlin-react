@@ -23,14 +23,21 @@ const Login = ({ loading, error, ...props }) => {
             console.log("response", response);
 
             console.log("Token recebido:", response.data.token);
-            console.log("Token armazenado:", localStorage.getItem('USER_KEY'));
+
 
             if (response.status === 200) {
+                localStorage.getItem('USER_KEY', response.data.token);
+                console.log("TOKEN ARMAZENADO"+response.data.token);
+    
                 props.setUser(response.data);
-                console.log("TESTE AQIO")
                 navigate('/hola');
-            } else {
-                props.loginFailure('Algo saiu errado. Tente novamente.');
+            }
+            if (response.status === 404) {
+                props.setUser(response.data);
+                props.authFailure('Usuário não cadastrado.');
+            }
+            else {
+                props.loginFailure('Algo saiu errado. Tente novamente. 1');
             }
         }).catch((err) => {
             if (err && err.response) {
@@ -40,10 +47,10 @@ const Login = ({ loading, error, ...props }) => {
                         props.loginFailure("A autenticação falhou. Reveja seus dados.");
                         break;
                     default:
-                        props.loginFailure('Algo saiu errado. Tente novamente.');
+                        props.loginFailure('Algo saiu errado. Tente novamente 2.');
                 }
             } else {
-                props.loginFailure('Algo saiu errado. Tente novamente.');
+                props.loginFailure('Algo saiu errado. Tente novamente. 3');
             }
         });
     };
@@ -154,7 +161,7 @@ const Login = ({ loading, error, ...props }) => {
 };
 
 const mapStateToProps = ({ auth }) => {
-    console.log("state ", auth);
+    console.log("state ", auth)
     return {
         loading: auth.loading,
         error: auth.error

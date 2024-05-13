@@ -4,15 +4,15 @@ import axios from 'axios';
 const getToken = () => {
     return localStorage.getItem('USER_KEY');
 }
+console.log('USER_KEY',)
 export const userLogin = (authRequest) => {
     return axios({
         method: 'POST',
         url: `${process.env.hostUrl || 'http://localhost:8080'}/auth/login`,
         data: authRequest
 
-    });
+    })
 }
-
 export const fetchUserData = () => {
     const token = localStorage.getItem('USER_KEY');
 
@@ -20,7 +20,7 @@ export const fetchUserData = () => {
     if (token) {
         return axios({
             method: 'GET',
-            url: `${process.env.hostUrl || 'http://localhost:8080'}/auth/auth/userinfo`,
+            url: `${process.env.hostUrl || 'http://localhost:8080'}/auth/userinfo`,
             headers: {
                 'Authorization': 'Bearer ' + getToken()
             }
